@@ -1,0 +1,47 @@
+
+/*********主要内容 开始**************/
+.content{
+width: 95%;
+margin: 0 auto;
+max-width: 1198px;
+padding: 20px 0;
+box-sizing: border-box;
+font-size: 0;
+}
+/********文章列表  开始*********/
+.article-list{
+display: none;   
+}
+
+/********文章列表 结束*********/
+
+/********文章列表 开始*********/
+.info{
+    width:100%;
+    max-width: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+}
+.info .warp{
+     margin: 0 auto;
+     width: 90%;
+}
+.info .logo{
+    background: url("../img/logo.png") no-repeat;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    background-size: contain;
+    box-sizing: border-box;
+    
+}
+.info .text{
+    font-size: 14px;
+    color: #b4b4b4;
+    line-height: 1.5;
+
+}
+
+/*********主要内容 结束**************/
+
+/**footer**/

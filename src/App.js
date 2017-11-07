@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+import ArticleList from './components/articleList';
+import Sliderright from './components/slideRight';
+// import './App.css';
+import './css/normalize.css';
+import './css/index.css';
+// import './css/article.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <div>
-          this is my first React App
+      <div>
+        <div className="Content">
+          <ArticleList />
+          <Sliderright />
         </div>
       </div>
     );

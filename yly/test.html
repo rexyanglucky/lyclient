@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <style>
+        .pagetool {
+            font-size: 0
+        }
+
+        .pagetool .firstPage,
+        .prevPage,
+        .pageNum,
+        .nextPage,
+        .lastPage,.prevPageGroup,.nextPageGroup {
+            background: #f6f9fb;
+            border: 1px solid #bac0cc;
+            border-right: none;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-collapse: collapse;
+        }
+
+        .pagetool .lastPage {
+            border: 1px solid #bac0cc;
+        }
+
+        .pagetool .firstPage:hover,
+        .prevPage:hover,
+        .pageNum:hover,
+        .nextPage:hover,
+        .lastPage:hover,
+        .prevPageGroup:hover,
+        .nextPageGroup:hover,
+        .active {
+            background: #0084f3;
+            color: #fff;
+        }
+
+        .pagetool .pageJump {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script type="text/javascript" src="js/dep/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/dep/PagingToolV1.js"></script>
+
+    <div class="pagetool">
+        <span class="firstPage">首页</span>
+        <span class="prevPage">&lt;上一页</span>
+        <span class="prevPageGroup">...</span>
+        <span class="pageNum">1</span>
+        <span class="pageNum">2</span>
+        <span class="pageNum">3</span>
+        <span class="pageNum">4</span>
+        <span class="pageNum">5</span>
+        <span class="pageNum">6</span>
+        <span class="nextPageGroup">...</span>
+        <span class="nextPage">下一页&gt;</span>
+        <span class="lastPage">尾页</span>
+        <span class="pageJump">
+         共<span class="totalPage">8</span>页，跳转值
+        <input type="number" class="pageNumInput" value="1" />
+        <input type="button" class="" value="确定" />
+        </span>
+    </div>
+    <br><br><br><br>
+<div id="data-warp"></div>
+<div id="page-warp"></div>
+    <script type="text/javascript" src="https://cdn.bootcss.com/vue/2.4.1/vue.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/axios/0.15.2/axios.min.js"></script>
+    <script type="text/javascript" src="dist/js/main.js"></script>
+<!--<script type="text/javascript" src="https://cdn.bootcss.com/axios/0.15.2/axios.js"></script>-->
+
+</body>
+
+</html>

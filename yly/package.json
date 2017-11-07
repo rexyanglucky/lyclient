@@ -1,0 +1,16 @@
+{
+  "name": "yly",
+  "version": "1.0.0",
+  "description": "this is yly website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rex",
+  "license": "ISC",
+  "devDependencies": {
+    "qs": "^6.5.0",
+    "vue": "^2.4.1",
+    "webpack": "^3.3.0"
+  }
+}

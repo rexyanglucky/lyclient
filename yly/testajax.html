@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="http://localhost:14217/Student/LearnCenter/GetImg" method="post" enctype="multipart/form-data" >
+<input type="file" name="file1" value="选择文件">
+    <input type="submit" value="提交"/>
+</form>
+<img src="img/teacher1.jpg" id="img1"/>
+<canvas id="imgcavans"></canvas>
+<script type="text/javascript" src="js/dep/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    var body="";
+    var img=new Image();
+    img.src="img/teacher1.jpg";
+    img.onload=function (event) {
+//        event.target.
+//        console.log();
+
+    };
+   var canvas=document.getElementById("imgcavans");
+    canvas.style.width=img.naturalWidth;
+    canvas.style.height=img.naturalHeight;
+    var ctx=canvas.getContext("2d");
+
+    ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight);
+    var d=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+
+    console.log(d);
+    var str2utf8 = window.TextEncoder ? function(str) {
+        var encoder = new TextEncoder('utf8');
+        var bytes = encoder.encode(str);
+        var result = '';
+        for(var i = 0; i < bytes.length; ++i) {
+            result += String.fromCharCode(bytes[i]);
+        }
+        return result;
+    } : function(str) {
+        return eval('\''+encodeURI(str).replace(/%/gm, '\\x')+'\'');
+    };
+    var str2Uint8Array = function(str) {
+        var arr = [], c;
+        for(var i = 0; i < str.length; ++i) {
+            c = str.charCodeAt(i);
+            if(c > 0xff) {
+                alert('Char code range out of 8 bit, parse error!');
+                return [];
+            }
+            arr.push(str.charCodeAt(i));
+        }
+        return new Uint8Array(arr);
+    };
+    var reader = new FileReader();
+    reader.readAsBinaryString(new Blob([d]));
+    reader.onload=function (src) {
+        var boundary = '----WebKitFormBoundar'+btoa(Math.random().toString()).substr(0,12);
+        body+= '--' + boundary + '\r\n' +
+                'Content-Disposition: form-data; name="username"\r\n\r\n' +
+                'rex\r\n' +
+                '--' + boundary + '\r\n'+
+                'Content-Disposition: form-data; name="file1";filename="teacher1.jpg"\r\nContent-Type:application/octet-stream\r\n\r\n' +
+                reader.result +'\r\n'+
+                '--' + boundary + '\r\n';
+
+
+        var encoded_body = str2utf8(body);
+        var byte_array = str2Uint8Array(encoded_body);
+        console.log(byte_array);
+        $.ajax({
+            url:"http://localhost:14217/Student/LearnCenter/GetImg",
+            type:"post",
+            processData:false,
+            contentType:'multipart/form-data; boundary='+boundary,
+            data:byte_array.buffer,
+            success:function (data) {
+                console.log(data);
+            }})
+    };
+
+//console.log(str);
+
+//    img.readAsBinaryString(img);
+//    img.onload(function (str) {
+//        console.log(str);
+//    });
+
+
+</script>
+</body>
+</html>

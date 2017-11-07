@@ -1,0 +1,161 @@
+ul{margin: 0;padding: 0;}
+a{color: #333;text-decoration: none;}
+a:hover{text-decoration:underline;}
+a:active{text-decoration:underline;}
+a:visited{text-decoration: none;color: #969696;}
+body{
+    font-family:"-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif";
+    font-size: 16px;
+    color:#2f2f2f;
+    padding-top:65px;
+     
+}
+/*********导航栏 开始**************/
+.fix-nav{
+    position: fixed;
+    height: 65px;
+    border-bottom: 1px solid #f0f0f0;
+    width: 100%;
+    top: 0;
+    background: #fff;
+    z-index: 2;
+}
+.footer{
+    height: 65px; 
+     background: #eee;
+}
+.fix-nav .fix-nav-content,.footer .fix-nav-content{
+    width: 80%;
+    max-width: 1198px;
+    margin: 0 auto;
+    height: 100%;
+    line-height: 65px;
+}
+.fix-nav .logo,.footer .logo{
+    background: url("../img/logo.png") no-repeat;
+    height: 45px;
+    width: 45px;
+    display:inline-block;
+    background-size: contain;
+    vertical-align: middle;
+}
+.fix-nav .search{
+    display:inline-block;
+}
+/*********导航栏 结束**************/
+/*********轮播图 开始**************/
+
+.nav{max-width: 1198px; margin: 0 auto;overflow: hidden;font-size: 0;position: relative;}
+.nav .nav-img{width: 6000px;}
+.nav .nav-img .item{list-style: none;display: inline-block;width: 1198px;}
+.nav .nav-img .item img{}
+.nav .nav-img-numbox{
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
+}
+.nav .nav-img-numbox .num{
+    filter: 'progid:DXImageTransform.Microsoft.gradient(startColorstr=#33FFFFFF, endColorstr=#33FFFFFF)';
+    background: rgba(255,255,255,.2);
+    padding: 4px 9px;
+    height: 16px;
+    line-height: 16px;
+    /*display: inline-block;*/
+    border-radius: 20px;
+    float: right;
+    margin-right: 80px;
+}
+.nav .nav-img-numbox .num i{
+ display: inline-block;
+ width: 10px;
+ height: 10px;
+ border-radius: 50%;
+ cursor: pointer;
+ background: #fff;
+ margin: 0 3px;
+ vertical-align: middle;
+}
+.nav .nav-img-numbox .num i.active{
+ background: red;
+}
+@media screen and (max-width:1200px){
+   .nav{display: none;} 
+}
+/*********轮播图 结束**************/
+/*********主要内容 开始**************/
+.content{
+width: 95%;
+margin: 0 auto;
+max-width: 1198px;
+padding: 20px 0;
+box-sizing: border-box;
+font-size: 0;
+}
+/********文章列表  开始*********/
+.article-list{
+    list-style: none;
+    width: 70%;
+    max-width: 838px;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    padding: 0 10px;
+   border-right:dashed 1px #969696;
+
+}
+.article-list .item{list-style: none;  font-size: 13px; color: #333;border-bottom: 1px solid #f0f0f0;}
+.article-list .item .title{font-size: 18px;font-weight: 600;}
+.article-list .item .author .item-time{color: #969696;}
+.article-list .item .article{line-height: 2;}
+.article-list .item .msg{font-size: 12px;color: #b4b4b4;}
+.article-list .item .msg span{cursor: pointer;}
+.article-list .item .left{display: inline-block;width: 75%;vertical-align: middle;}
+.article-list .item .right{box-shadow: 1px 1px 5px #cecece;display: inline-block;vertical-align: middle;}
+.article-list .item .right img{width: 150px;}
+/********文章列表 结束*********/
+
+/********文章列表 开始*********/
+.info{
+    width:30%;
+    max-width:360px;
+    display: inline-block;
+  
+    box-sizing: border-box;
+
+}
+.info .warp{
+     margin: 0 auto;
+     width: 90%;
+}
+.info .logo{
+    background: url("/img/logo.png") no-repeat;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    background-size: contain;
+    box-sizing: border-box;
+    
+}
+.info .text{
+    font-size: 14px;
+    color: #b4b4b4;
+    line-height: 1.5;
+
+}
+/**pad 竖屏**/
+@media screen and (max-width: 768px) {
+    .article-list .item{padding-bottom: 10px;}
+    .article-list .item .left{display: inline-block;width: 100%;vertical-align: middle;}
+    .article-list .item .right{box-shadow: 1px 1px 5px #cecece;display: block;width: 100%;}
+    .article-list .item .right img{width: 100%;vertical-align: top;}
+}
+@media screen and (max-width:767px){
+   .info{display: none;}
+    .article-list{border: none;width: 100%;}
+}
+/********文章列表 结束*********/
+
+/*********主要内容 结束**************/
+
+/**footer**/
+.footer a{cursor: pointer; color: #50d3bf;}
