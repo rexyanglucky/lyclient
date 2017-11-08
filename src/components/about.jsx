@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-class SlideRight extends Component{
-    // constructor(){
-    //     super();
-    // }
+import '../css/about.css';
+class About extends Component{
     render(){
         return (
             <div className="info">
@@ -19,4 +17,4 @@ class SlideRight extends Component{
         )
     }
 }
-export default SlideRight;
+export default About;

@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+
 // import Test from './test1'
 // import Clock from './ClockClass'
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
 registerServiceWorker();
 
 
@@ -66,8 +67,13 @@ function inherit(subType, superType) {
     var prototype = object(superType.prototype);
     subType.prototype = prototype;
     subType.prototype.constructor = subType;
+    if (superType) Object.setPrototypeOf ? Object.setPrototypeOf(subType, superType) : subType.__proto__ = superType;
 }
 inherit(Person, Life);
+// let a={};
+// Object.getPrototypeOf(Person).call(a);
+// console.log(Person.__proto__);
+// console.log(a);
 Person.prototype.say = function () { console.log("I'm " + this.className + " and I'm  " + this.Nation + " My name is " + this.name); }
 function test(p) {
     if (p instanceof Life) {
