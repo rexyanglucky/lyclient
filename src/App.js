@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { Router, Route, Switch } from 'react-router'
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Link,
   Switch
