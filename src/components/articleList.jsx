@@ -23,7 +23,9 @@ class ArticleList extends Component {
         return (<ul className="article-list">
             {
                 this.state.articleList.map(item => {
-                    return <ArticleItem key={item._id} article={item} />
+                    if (item) {
+                        return <ArticleItem key={item._id} article={item} />
+                    }
                 })
             }
 

@@ -160,3 +160,10 @@ font-size: 0;
 
 /**footer**/
 .footer a{cursor: pointer; color: #50d3bf;}
+
+
+.btn_add{
+    color: greenyellow;
+    border: solid 1px greenyellow;
+    cursor: pointer;
+}
