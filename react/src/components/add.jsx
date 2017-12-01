@@ -10,8 +10,8 @@ import config from '../config';
 import SimpleMDE from 'simplemde'
 import marked from 'marked'
 import highlight from 'highlight.js'
-import '../../node_modules/simplemde/dist/simplemde.min.css';
-import '../../node_modules/highlight.js/styles/atelier-cave-dark.css';
+import '../../../node_modules/simplemde/dist/simplemde.min.css';
+import '../../../node_modules/highlight.js/styles/atelier-cave-dark.css';
 class Add extends Component {
     constructor(props) {
         super(props);

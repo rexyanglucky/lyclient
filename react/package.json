@@ -1,0 +1,30 @@
+{
+  "name": "yly",
+  "version": "1.0.0",
+  "description": "yly",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "webpack": "webpack --config build/webpack.dev.conf.js",
+    "build": "node build/build.js"
+  },
+  "author": "rexyang",
+  "license": "ISC",
+  "dependencies": {
+    "babel-loader": "^7.1.2",
+    "copy-webpack-plugin": "^4.2.3",
+    "css-loader": "^0.28.7",
+    "friendly-errors-webpack-plugin": "^1.6.1",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router": "^4.2.0",
+    "rimraf": "^2.6.2",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.5",
+    "webpack-merge": "^4.1.1"
+  }
+}

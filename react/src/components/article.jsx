@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../css/article.css';
 import marked from 'marked'
 import highlight from 'highlight.js'
-import '../../node_modules/highlight.js/styles/atelier-cave-dark.css';
+import '../../../node_modules/highlight.js/styles/atelier-cave-dark.css';
 class Article extends Component {
     constructor(props) {
         super(props);
