@@ -7,8 +7,6 @@ import registerServiceWorker from '../../registerServiceWorker';
 
 ReactDOM.render(<App/>, document.getElementById('root'));
 // registerServiceWorker();
-
-
 function Life(name) {
     this.name = name;
     this.className = "earth";

@@ -64,14 +64,21 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      // filename: 'index.html',
       filename: 'index.html',
       template: 'src/html/index.html',
       inject: true,
+      chunks:['index\\index']
       // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
       //   './service-worker-dev.js'), 'utf-8')}</script>`
     }),
-    new FriendlyErrorsPlugin()
+    new HtmlWebpackPlugin({
+      filename: 'test.html',
+      template: 'src/html/test.html',
+      chunks:['test\\test'],
+      inject: true,
+      // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
+      //   './service-worker-dev.js'), 'utf-8')}</script>`
+    })
   ]
 })
 
@@ -85,7 +92,6 @@ module.exports = new Promise((resolve, reject) => {
       process.env.PORT = port
       // add port to devServer config
       devWebpackConfig.devServer.port = port
-
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {

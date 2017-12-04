@@ -21,21 +21,25 @@ function getAllFilesName(dir, nameArr) {
         }
         else {
             let n = rpath.slice(rpath.lastIndexOf('\\entry\\') + '\\entry\\'.length, rpath.length - 3);
-            nameArr[n] = rpath;
+            // nameArr[n] = ['webpack-dev-server/client?http://localhost:8080'].concat(rpath);
+            nameArr[n]=rpath;
+
         }
         return item;
     });
 }
 module.exports = {
-    entry: function () {
+    entry: (function () {
         let entry = resolve('src/entry');
         console.log(entry);
         let nameArr = {};
         getAllFilesName(entry, nameArr);
         console.log(nameArr);
-
         return nameArr;
-    },
+    })(),
+    // entry:{
+    //     app:'./src/entry/index/index.js',
+    // },
     output: {
         path: config.build.assetsRoot,
         filename: '[name].js',
@@ -57,7 +61,7 @@ module.exports = {
                 loader: 'babel-loader',
                 include: [resolve('src')],
             },
-       
+
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',

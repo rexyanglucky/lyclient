@@ -10,7 +10,6 @@ class Index extends Component{
     render(){
         return (
             <div className="content">
-            12
             <ArticleList/>
             <Slideright/>
             </div>
