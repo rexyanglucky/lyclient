@@ -1,7 +1,7 @@
 'use strict'
 const path = require('path')
 const config = require('../config')
-
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
@@ -11,7 +11,6 @@ exports.assetsPath = function (_path) {
 
 exports.cssLoaders = function (options) {
   options = options || {}
-
   const cssLoader = {
     loader: 'css-loader',
     options: {
@@ -31,7 +30,25 @@ exports.cssLoaders = function (options) {
         })
       })
     }
-    return loaders;
+    // if (options.extract) {
+    //   return ExtractTextPlugin.extract({
+    //     use: loaders,
+    //     fallback: 'vue-style-loader'
+    //   })
+    // } else {
+    //   return ['vue-style-loader'].concat(loaders)
+    // }
+    //style-loader
+    // if (options.extract) {
+    //   return ExtractTextPlugin.extract({
+    //     use: loaders,
+    //     fallback: 'style-loader'
+    //   })
+    // } else {
+    //   return ['style-loader'].concat(loaders)
+    // }
+    return ['style-loader'].concat(loaders)
+    
   }
 
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
@@ -57,6 +74,7 @@ exports.styleLoaders = function (options) {
       use: loader
     })
   }
+  console.log(output);
   console.log(JSON.stringify(output));
   return output
 }

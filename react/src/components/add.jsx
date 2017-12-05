@@ -10,6 +10,7 @@ import config from '../config';
 import SimpleMDE from 'simplemde'
 import marked from 'marked'
 import highlight from 'highlight.js'
+import '../css/add'
 import '../../../node_modules/simplemde/dist/simplemde.min.css';
 import '../../../node_modules/highlight.js/styles/atelier-cave-dark.css';
 class Add extends Component {
@@ -18,8 +19,10 @@ class Add extends Component {
         this.state = {
             title: '',
             content: '',
-            author: 'rex'
+            author: 'rex',
+            headImg: '',
         };
+        this.postData=new FormData();
         this.handleChange = this.handleChange.bind(this);
         this.saveArticle = this.saveArticle.bind(this);
         /*   this.simplemde = new SimpleMDE({
@@ -120,30 +123,53 @@ class Add extends Component {
      */
     saveArticle() {
         let self = this;
-        // alert(self.smde.value());
-        // return;
-        // {title:"",content:"",author:"",createTime:new Date(),updateTime:new Date()}
-        self.setState({content:self.smde.value()});
-        axios.post(config.url + "/article/add", self.state).then((response) => {
-            // console.log(response);
-            if (response.data) {
-                let data = response.data.data;
-                console.log(data);
-                // self.setState({ articleList: data });
-                alert('保存成功');
-            }
-        });
+        self.setState({ content: self.smde.value() });
+        
+        setTimeout(() => {
+            // let param = self.state;
+            self.postData.set('content', self.state.content);
+            let param = self.postData;
+            axios.post(config.url + "/article/add", param).then((response) => {
+                if (response.data) {
+                    let data = response.data.data;
+                    console.log(data);
+                    alert('保存成功');
+                }
+            });
+        }, 0);
+
     }
     handleChange(event) {
+        let self = this;
         let target = event.target;
-        let value = target.type === "checkbox" ? target.checked : target.value;
         let name = target.name;
-        this.setState({ [name]: value });
+        if (target.type === "file") {
+            let file = target.files[0];
+            var supportedTypes = ['image/jpg', 'image/jpeg', 'image/png'];
+            if (file && supportedTypes.indexOf(file.type) >= 0) {
+                let oReader = new FileReader();
+                oReader.onload = function (e) {
+                    self.setState({ headImg: e.target.result });
+                }
+                oReader.readAsDataURL(file)
+                self.postData.set(name,file);
+            }
+            else{alert('只支持图片格式');}
+        }
+        else {
+            let value = target.type === "checkbox" ? target.checked : target.value;
+            self.setState({ [name]: value });
+            self.postData.set(name,value);
+          
+        }
     }
     render() {
 
         return (
-            <div>
+            <div className='add_content'>
+                <label htmlFor="headImg"></label>
+                <input type="file" id="headImg" name="headImg" onChange={this.handleChange} />
+                <img src={this.state.headImg} alt="" className='head_img_preview w100'/>
                 <p>
                     <label htmlFor="title">标题</label>
                     <input id='title' name='title' value={this.state.title} onChange={this.handleChange}></input>

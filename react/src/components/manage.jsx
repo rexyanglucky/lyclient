@@ -11,6 +11,7 @@ import {
 import ArticleItem from './articleItem';
 import config from '../config';
 import axios from 'axios';
+import '../css/index';
 class Manage extends Component {
     constructor(props) {
         super(props);

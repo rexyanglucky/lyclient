@@ -40,7 +40,8 @@ class Article extends Component {
     }
 
     render() {
-        let { articleInfo } = this.state;
+        
+        let articleInfo  = this.state.articleInfo;
         let contentHtml = '';
         if (articleInfo.content) {
             contentHtml = marked(articleInfo.content,

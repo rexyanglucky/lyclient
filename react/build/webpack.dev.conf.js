@@ -78,6 +78,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       inject: true,
       // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
       //   './service-worker-dev.js'), 'utf-8')}</script>`
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'about.html',
+      template: 'src/html/about.html',
+      chunks:[''],
+      inject: true,
+      // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
+      //   './service-worker-dev.js'), 'utf-8')}</script>`
     })
   ]
 })

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ArticleItem from './articleItem';
 import config from '../config';
 import axios from 'axios';
-import '../css/index.css';
+
 class ArticleList extends Component {
     constructor() {
         super();
