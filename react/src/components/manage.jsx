@@ -40,7 +40,6 @@ class Manage extends Component {
                         return item;
                     }
                 })
-                console.log(r);
                 self.setState({ articleList: r });
 
             }

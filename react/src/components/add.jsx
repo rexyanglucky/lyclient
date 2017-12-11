@@ -132,7 +132,6 @@ class Add extends Component {
             axios.post(config.url + "/article/add", param).then((response) => {
                 if (response.data) {
                     let data = response.data.data;
-                    console.log(data);
                     alert('保存成功');
                 }
             });

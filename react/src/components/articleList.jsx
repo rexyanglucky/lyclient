@@ -11,10 +11,8 @@ class ArticleList extends Component {
     componentDidMount() {
         let self = this;
         axios.get(config.url + "/article/list").then((response) => {
-            // console.log(response);
             if (response.data) {
                 let data = response.data.data;
-                console.log(data);
                 self.setState({ articleList: data });
             }
         });

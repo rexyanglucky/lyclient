@@ -8,6 +8,7 @@ import {
 import ArticleItemMsg from './articleItemMsg.jsx';
 import marked from 'marked'
 import highlight from 'highlight.js'
+import dateHelper from '../lib/dateFormat'
 import '../../../node_modules/highlight.js/styles/atelier-cave-dark.css';
 class ArticleItem extends Component {
     // constructor(props) {
@@ -15,35 +16,16 @@ class ArticleItem extends Component {
     // }
     render() {
         let article = this.props.article;
-        let contentHtml = '';
-        if (article.content) {
-            try{
-            contentHtml = marked(article.content,
-                {
-                    renderer: new marked.Renderer(),
-                    gfm: true,
-                    pedantic: false,
-                    sanitize: false,
-                    tables: true,
-                    breaks: true,
-                    smartLists: true,
-                    smartypants: true,
-                    highlight: function (code) {
-                        return highlight.highlightAuto(code).value;
-                    }
-                });
-            }
-            catch(ex){}
-        }
         return (
             <Link to={{ pathname: '/article', query: { id: article._id }, search: `id=${article._id}` }}>
                 <li className="item">
                     <div className={article.headImg?'left w75':'left'}>
-                        <p className="author">{article.author} <span className="item-time">3 小时前</span></p>
+                        <p className="author">{article.author} <span className="item-time">{new Date(article.updateTime).toCustomRegString("yyyy-MM-dd HH:mm") }</span></p>
                         <p className="title">{article.title}</p>
-                        <p className="article" dangerouslySetInnerHTML={{
+                        {/* <p className="article" dangerouslySetInnerHTML={{
                         __html: contentHtml
-                    }}></p>
+                    }}></p> */}
+                    <p>{article.content.replace(/<\/?.+?>/g,"")}</p>
                         <ArticleItemMsg />
                     </div>
                     {article.headImg && (<div className="right">

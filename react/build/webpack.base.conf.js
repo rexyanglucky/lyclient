@@ -3,6 +3,7 @@ const path = require('path')
 const fs = require('fs');
 const utils = require('./utils')
 const config = require('../config')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 function resolve(dir) {
     return path.resolve(__dirname, '..', dir)
 }
@@ -31,10 +32,8 @@ function getAllFilesName(dir, nameArr) {
 module.exports = {
     entry: (function () {
         let entry = resolve('src/entry');
-        console.log(entry);
         let nameArr = {};
         getAllFilesName(entry, nameArr);
-        console.log(nameArr);
         return nameArr;
     })(),
     // entry:{
@@ -42,7 +41,7 @@ module.exports = {
     // },
     output: {
         path: config.build.assetsRoot,
-        filename: '[name].js',
+        filename: 'js/[name].js',
         publicPath: process.env.NODE_ENV === 'production'
             ? config.build.assetsPublicPath
             : config.dev.assetsPublicPath
@@ -87,5 +86,14 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    plugins:[
+        new ExtractTextPlugin({
+            filename:  (getPath) => {
+              return getPath('css/[name].css').replace('css/js', 'css');
+            },
+            allChunks: true
+          })
+        ]
+    
 }

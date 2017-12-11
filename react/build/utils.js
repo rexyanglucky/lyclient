@@ -1,7 +1,7 @@
 'use strict'
 const path = require('path')
 const config = require('../config')
-// const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
@@ -39,15 +39,15 @@ exports.cssLoaders = function (options) {
     //   return ['vue-style-loader'].concat(loaders)
     // }
     //style-loader
-    // if (options.extract) {
-    //   return ExtractTextPlugin.extract({
-    //     use: loaders,
-    //     fallback: 'style-loader'
-    //   })
-    // } else {
-    //   return ['style-loader'].concat(loaders)
-    // }
-    return ['style-loader'].concat(loaders)
+    if (options.extract) {
+      return ExtractTextPlugin.extract({
+        use: loaders,
+        fallback: 'style-loader'
+      })
+    } else {
+      return ['style-loader'].concat(loaders)
+    }
+    // return ['style-loader'].concat(loaders)
     
   }
 
@@ -67,6 +67,7 @@ exports.cssLoaders = function (options) {
 exports.styleLoaders = function (options) {
   const output = []
   const loaders = exports.cssLoaders(options)
+ 
   for (const extension in loaders) {
     const loader = loaders[extension]
     output.push({
