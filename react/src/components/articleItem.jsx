@@ -9,6 +9,7 @@ import ArticleItemMsg from './articleItemMsg.jsx';
 import marked from 'marked'
 import highlight from 'highlight.js'
 import dateHelper from '../lib/dateFormat'
+import config from '../config';
 import '../../../node_modules/highlight.js/styles/atelier-cave-dark.css';
 class ArticleItem extends Component {
     // constructor(props) {
@@ -29,7 +30,7 @@ class ArticleItem extends Component {
                         <ArticleItemMsg />
                     </div>
                     {article.headImg && (<div className="right">
-                        <img src={article.headImg} alt="别山举水" data-realsrc="img/teacher1.jpg" />
+                        <img src={`${config.cdnurl}${article.headImg}`} alt="别山举水" data-realsrc="img/teacher1.jpg" />
                     </div>)}
                 </li>
             </Link>

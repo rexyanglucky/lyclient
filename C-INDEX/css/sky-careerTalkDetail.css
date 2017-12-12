@@ -1,0 +1,263 @@
+﻿i{background: url('../img/sky-careerTalk.png') no-repeat;display: inline-block;}
+button{outline:none}
+body{overflow-x: hidden;}
+.sky-careerTalkDetailContent{background: #f6f9fb;padding-bottom: 100px}
+.bg{background: url('../img/sky-careerTalkBg.png') no-repeat; width: 100%;height: 224px;}
+.sky-careerTalkDetailMain{width: 1200px;margin: auto;padding-top:30px; margin-top:-224px;}
+.companyDetailLogo{margin-right: 24px;border-radius: 14px;width: 140px;height: 140px;overflow: hidden;}
+.companyDetailLogo img{width: 140px;height: 140px;}
+.companyDetailTxt h3 {
+    color: #333333;
+    font-family: 'microsoft yahei';
+    font-size: 20px;
+    padding-top:15px;
+	padding-bottom: 20px;
+}
+.companyDetailTxt .city,.companyDetailTxt .property,.companyDetailTxt .industry{max-width: 130px;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; word-wrap: normal;}
+.companyDetailTxt .city{max-width: 200px;padding-right: 12px;}
+.sky-careerTalkCompany{display: inline-block;line-height: 24px;max-width: 500px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; word-wrap: normal;}
+.companyDetail-state{overflow: hidden;text-overflow: ellipsis;white-space: nowrap; word-wrap: normal; margin-left: 10px; font-weight: normal; display: inline-block;width: 60px;height: 20px;text-align: center;line-height: 20px;border-radius: 20px; font-family: 'microsoft yahei';font-size: 14px; }
+/**宣讲会3中状态**/
+.detail-noStart{border:1px solid #666666;color: #666666;}
+.detail-live{border:1px solid #6ba224;color: #6ba224;}
+.detail-playback{border:1px solid #ffa902;color:#ffa902;}
+
+.city,.property{background: url('../img/headLine.jpg') no-repeat right center; }
+.city,.property,.industry{display: inline-block; padding:1px 6px 3px 6px;color: #666;font-family: 'microsoft yahei';font-size: 16px; }
+.city{padding-left: 0px}
+.property{padding-right: 12px;}
+.directSeedingTime,.directSeedingPeo{display: inline-block; margin-top:8px; margin-right: 28px;color: #999999;font-family: 'microsoft yahei';font-size: 14px;}
+.directSeedingTime i{margin-right: 8px;margin-top: -3px; width:16px;height:16px;background-position:  -241px -3px;vertical-align: middle;}
+.directSeedingPeo i{margin-right: 8px;margin-top: -3px; width:19px;height:15px;background-position: -281px -3px;vertical-align: middle;}
+.companyInfor{margin-bottom: 20px;}
+.sky-careerTalkDetailVideo{width: 860px;height: 485px; background: #000;margin-bottom: 20px;}
+.informationTab{background: #fff}
+.informationTabList{border-bottom: 1px solid #f1f1f1;}
+.informationTabList li {
+    cursor: pointer;
+    width: 215px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    color: #666666;
+    font-family: 'microsoft yahei';
+    font-size: 16px;
+}
+.informationTabList .sky-careerTalkIcon {
+    display: none;
+    left: 99px;
+    bottom: -8px;
+    width: 16px;
+    height: 8px;
+    background-position:-1px -240px;
+}
+.informationTabList li.acurrent {
+    background: #27b3e9;
+    color: #fff;
+}
+.informationCont{background: #fff;padding: 0 30px;padding-bottom: 73px;min-height: 760px;width: 800px;}
+.careerTalker{margin-bottom: 34px;}
+.careerTalkerPhoto{margin-right: 20px; width: 110px;height: 110px;overflow: hidden;border-radius:50%;background: #000}
+.careerTalkerPer{padding-top:10px;}
+.talkerName{padding:20px 0; color: #333;font-family: 'microsoft yahei';font-size: 18px;}
+.talkerJob{color: #999999;font-family: 'microsoft yahei';font-size: 16px;}
+.careerTalkCom{padding-bottom: 30px;}
+.careerTalkComName{margin-bottom: 18px; color: #333;font-family: 'microsoft yahei';font-size: 18px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; word-wrap: normal;max-width: 800px;}
+.careerTalkComName em{font-weight: bold;}
+.careerTalkComTime{color: #999999;font-family: 'microsoft yahei';font-size: 14px;}
+.careerTalkText p{margin-bottom: 35px;width: 800px; color: #333;font-family: 'microsoft yahei';font-size: 16px;line-height: 26px;}
+.sky-careerTalkDetailR{width: 320px;}
+.newAnnouncement{background:#fff;padding-bottom: 20px;margin-bottom: 15px;min-height: 111px;}
+.newAnnouncement h3{padding-left: 15px;height: 45px;line-height: 45px; background: #e7f8ff;color: #333;font-family: 'microsoft yahei';font-size: 18px;}
+.newAnnouncement i{margin-right: 12px; width: 25px;height: 18px;background-position: -2px -80px;vertical-align: middle;}
+.newAnnouncement p{padding: 0 15px;padding-top:16px;width:290px;line-height: 24px; color: #333;font-family: 'microsoft yahei';font-size: 14px;max-height: 50px;overflow-y:auto }
+.chatQuestTab li{cursor: pointer;font-weight: bold; border-top:1px solid #e7f8ff; width: 160px;height: 44px;text-align: center; line-height: 44px; background: #e7f8ff;color: #666;font-family: 'microsoft yahei';font-size: 18px;}
+.chatCont{padding:0 14px;background: #fff;}
+.chatCont li{padding:10px 0 15px 0;border-bottom: 1px dotted #f3f3f3}
+.chatList i{margin-right: 8px; width: 24px;height: 20px;background-position:-440px -80px;vertical-align: middle;}
+.QuestList i{margin-right: 8px;width: 24px;height: 22px;background-position:-80px -80px;vertical-align: middle;}
+.chatQuestList li.acurrent{border-top:1px solid #27b3e9;border width: 160px;height: 44px;text-align: center; line-height: 44px; background: #fff;color: #333;font-family: 'microsoft yahei';font-size: 18px;}
+.chatList i.iAcur{margin-right: 8px; width: 24px;height: 20px;background-position: -40px -80px;vertical-align: middle;}
+.QuestList i.iAcur{margin-right: 8px;width: 24px;height: 22px;background-position:0 -120px;vertical-align: middle;}
+.chatCont .chaterPhoto{overflow: hidden; width: 40px;height: 40px;border-radius: 50%;margin-right: 15px;}
+.chaterName{overflow: hidden;text-overflow: ellipsis;white-space: nowrap; word-wrap: normal;display: block; font-weight: bold;padding-bottom: 4px; color: #333;font-family: 'microsoft yahei';font-size: 14px;}
+.questerContent .chaterName{max-width:95px;}
+.chaterCont{color: #666666;font-family: 'microsoft yahei';font-size: 12px;}
+.chatTime{color: #cccccc;font-family: 'microsoft yahei';font-size: 12px;}
+.speak{height: 33px; padding:10px 15px;background: #f5f5f5;margin-bottom: 20px;}
+.speakInput{margin-right: 10px; padding:8px 0 8px 8px;width: 202px; border:1px solid #f1f1f1;background: #fff;}
+
+.speakInputBan{background: #e0e0e0;}
+
+.speakBtn{cursor: pointer; width: 66px;height: 30px;background: #27b3e9;border: none;border-radius: 5px;color: #fff;font-family: 'microsoft yahei';font-size: 14px;rasize:none;}
+
+.speakBtnBan{cursor: auto;background: #b5b5b5;}
+.surveyWallTitle {
+    padding-left: 15px;
+    height: 40px;
+    line-height: 40px;
+    background: #e7f8ff;
+    color: #333;
+    font-family: 'microsoft yahei';
+    font-size: 18px;
+}
+.surveyWall{min-height: 896px;}
+.surveyWallTitle i{margin-right: 12px; margin-top: -4px; width: 23px;height: 25px;background-position:-361px -80px;vertical-align: middle;}
+.surveyWallCont{padding:0 15px;background: #fff}
+.surveyWallList{padding-top:20px;padding-bottom: 13px; border-bottom: 1px dotted #f0f0f0;}
+.surveyWallList p{color: #333;font-family: 'microsoft yahei';font-size: 14px;line-height: 24px;}
+.surveyWallSelect li{padding:7px 0;}
+.selectRound{cursor: pointer; display: inline-block;margin-top: -3px;margin-right: 11px; width: 12px;height: 12px;border-radius: 50%;border:1px solid #cdcdcd;vertical-align: middle;}
+.selectRound i{display: none; width: 8px;height: 8px;background-position: -400px -81px;vertical-align: middle;left:2px;top:2px;}
+.surveyWall-submitBtn{ padding-top: 30px;padding-bottom:45px; text-align: center;}
+.surveyWall-submitBtn .buttonCur{cursor: pointer; background: #27b3e9}
+.surveyWall-submitBtn button{width: 115px;height: 40px;text-align: center;line-height: 40px;border:none;border-radius: 10px; background: #b5b5b5;color: #fff;font-family: 'microsoft yahei';font-size: 18px;}
+.countDown{text-align: center;padding-bottom: 9px;height: 149px;}
+.mobileLook{padding-left: 40px; padding-top:20px; padding-bottom: 48px;text-align: center;}
+.countDownTxt{color: #333;font-family: 'microsoft yahei';font-size: 16px;}
+.countDown button{cursor: pointer; margin-bottom: 20px; width: 115px;height: 40px;background: #27b3e9;text-align: center;line-height: 40px;border:none;border-radius: 10px; color: #fff;font-family: 'microsoft yahei';font-size: 18px;}
+.countDown .button{background: #b5b5b5;}
+.mobileLookBtn{margin-bottom: 15px; height: 40px;}
+.mobileLookBtn button{cursor: pointer;width: 120px;height: 40px;text-align: center;line-height: 40px;border:none;border-radius: 10px; background: #27b3e9;color: #fff;font-family: 'microsoft yahei';font-size: 18px;}
+.mobileLookBtn i{margin-right: 5px;    margin-top: -5px; width: 15px;height: 28px;background-position:-281px -160px;vertical-align: middle;}
+.mobileLookCont{padding-top:15px;}
+.dimension-code{margin-left: 10px;right: 38px;top: -4px;display:none;}
+.dimension-code img{width:111px;height:111px}
+/**已报名状态**/
+.countDown button.hasBook{color: #fff;background:#b5b5b5;}
+.share{color: #999;font-family: 'microsoft yahei';font-size: 14px;}
+.share a,.share span{display: inline-block;}
+.wx i{width: 18px;height: 18px;background-position: -320px -41px;vertical-align: middle;}
+.qq i{width: 18px;height: 18px;background-position: -361px -40px;vertical-align: middle;}
+.wb i{width: 18px;height: 18px;background-position: -400px -40px;vertical-align: middle;}
+.kj i{width: 18px;height: 18px;background-position: -440px -40px;vertical-align: middle;}
+.countDownCont{padding:10px 0;text-align: center;}
+.cntDigit{color: #fff;font-family: 'microsoft yahei';font-size: 18px;display: inline-block;text-align: center;line-height: 32px; background:url('../img/timeBg.png') no-repeat;width: 20px;height: 32px;}
+
+.interactArea{padding-bottom: 40px;}
+.interactArea h2{padding:20px 0;padding-top:0;color: #333;font-family: 'microsoft yahei';font-size: 16px;}
+
+.interactTe textarea{width: 800px;width: 770px\9; height: 180px; padding:0 15px; padding-top:18px; border:1px solid #f1f1f1;border-radius: 5px; color: #333;font-family: 'microsoft yahei';font-size: 14px;resize:none}
+.interactTe span{bottom: -24px;right: 0px; color: #c8c8c8;font-family: 'microsoft yahei';font-size: 14px;}
+.interactBtn{padding:20px 0;padding-top:30px; text-align: right;}
+.interactBtn button{cursor: pointer;width: 115px;height: 40px;line-height: 40px;text-align: center;border-radius: 10px;background: #27b3e9;border:none; color: #fff;font-family: 'microsoft yahei';font-size: 18px;}
+.dialogueArea{background: #f7f7f7;padding-left: 20px;width: 780px}
+.dialoguePhoto{margin-right: 8px; overflow: hidden;border-radius: 50%;margin-right: 15px;}
+.dialoguePhoto img{width: 40px;height: 40px}
+.dialogueSpeak{margin-bottom: 14px;}
+.dialogueName{float: left; margin-right: 14px; color: #333;font-family: 'microsoft yahei';font-size: 14px;max-width: 60px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;word-wrap: normal;}
+.hr{color: #333;font-family: 'microsoft yahei';font-size: 14px;float: left;max-width: 60px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;word-wrap: normal;}
+.quizCont .dialogueCont{display: inline-block;line-height: 20px; max-width: 640px;float: left;font-weight: normal;color: #333;font-family: 'microsoft yahei';font-size: 14px;}
+.answerCont .dialogueCont{display: inline-block;line-height: 20px;float: left;font-weight: normal;color: #333;font-family: 'microsoft yahei';font-size: 14px;}
+.dialogueContH{display: inline-block;line-height: 20px; max-width:510px;float: left;font-weight: normal;color: #333;font-family: 'microsoft yahei';font-size: 14px;}
+.dialogueTime{color: #999;font-family: 'microsoft yahei';font-size: 14px;}
+.praiseNum{margin-left: 20px;color: #999;font-family: 'microsoft yahei';font-size: 18px;}
+.praiseNum i{margin-top: -5px;margin-right: 10px; width: 20px;height: 21px;background-position: -41px -120px;vertical-align: middle;}
+.dialogueAreaList{padding-top:30px;padding-bottom: 20px;}
+.praiseNum .praiseIconAcur{margin-top: -5px;margin-right: 10px; width: 20px;height: 21px;background-position: -80px -119px;vertical-align: middle;}
+.answerCont {padding-left: 50px;padding-top:23px;padding-bottom: 15px;}
+.recruitJobTitle{color: #333;font-family: 'microsoft yahei';font-size: 16px;}
+.jobNum{color: #999;font-family: 'microsoft yahei';font-size: 14px;}
+.jobNum em{color: #ffa902}
+.pageNum{margin-right: 6px; font-family: 'microsoft yahei';font-size: 12px;color: #4f5f6f}
+.leftBtn{margin-top: -3px;margin-right: 18px; width: 7px;height: 14px;background-position: -40px -160px;vertical-align: middle;}
+.rightBtn{margin-top: -4px;margin-left: 18px;width: 8px;height: 13px;background-position: -79px -187px;vertical-align: middle;}
+/**可点击的**/
+.leftBtnC{cursor: pointer; margin-top: -3px;margin-right: 18px; width: 8px;height: 14px;background-position: -40px -186px;vertical-align: middle;}
+.rightBtnC{cursor: pointer;margin-top: -5px;margin-left: 18px;width: 8px;height: 13px;background-position: -79px -161px;vertical-align: middle;}
+.jobMlist_partm,.lineDeliverT{width: 800px;margin-top:20px;}
+.jobMlist_partm table,.lineDeliverT table{width: 100%}
+.jobMlistbox th,.lineDeliverT th{height: 48px;border-top: 2px solid #e7f8ff;border-bottom: 2px solid #e7f8ff;font-size: 16px;color: #333;font-family: 'microsoft yahei';text-align: center;}
+.jobMlistName{padding-left: 20px;width: 172px;}
+.jobMlistArea{width: 186px;}
+.jobMlistbox .jobMlistCom{width: 250px;padding-left: 30px;text-align: left;}
+.jobMlistbox td{height: 50px;}
+.jobMlist_partl{width: 182px;padding-left: 10px;text-align: center;}
+.oJobNameVal a{display: inline-block;max-width: 182px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; word-wrap: normal;}
+.oJobNameVal a{color: #27b3e9;font-family: 'microsoft yahei';font-size: 14px;}
+.max80{width: 186px; text-align: center;color: #666;font-family: 'microsoft yahei';font-size: 14px;}
+.max80 span{display: inline-block;max-width: 186px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; word-wrap: normal;}
+.max210{padding-left: 30px;width: 250px; color: #666;font-family: 'microsoft yahei';font-size: 16px;}
+.max210 span{display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;word-wrap: normal;max-width: 220px;font-size: 14px;;}
+.jobMlist_partmCont td{height: 50px}
+.lineDeliverstatus .jobMstatus_release{display: inline-block;border:1px solid #11bbfc;border-radius: 5px; width: 63px;height: 23px;text-align: center;line-height: 23px;  font-family: 'microsoft yahei';font-size: 12px;color: #11bbfc;background: #fff;}
+.jobMstatus .jobMstatus_release{display: inline-block;border:1px solid #6ba224;border-radius: 5px; width: 63px;height: 23px;text-align: center;line-height: 23px;  font-family: 'microsoft yahei';font-size: 12px;color: #6ba224;background: #fff;}
+.lineDeliverstatus .jobMstatus_release a{font-family: 'microsoft yahei';font-size: 12px;color: #11bbfc;display: inline-block; width: 63px;height: 23px;text-align: center;line-height: 23px;}
+.jobMstatus .jobMstatus_release a{font-family: 'microsoft yahei';font-size: 12px;color: #6ba224;display: inline-block; width: 63px;height: 23px;text-align: center;line-height: 23px;}
+.jobMstatus i{margin-right: 20px; width: 15px;height: 15px;background-position:-160px -161px;vertical-align: middle;}
+.jobMstatus .startAcur{margin-right: 20px; width: 15px;height: 15px;background-position:-120px -160px;vertical-align: middle;}
+.jobMstatus{text-align: center;}
+.lineDeliverT th{
+    text-align: left
+}
+.lineDeliverT .lineDeliverTime{width: 178px;text-align: center;}
+.lineDeliverT .lineDeliverCity{width: 98px;padding:0 10px;text-align: center;}
+.lineDeliverT .lineDeliverSch{width: 180px;text-align: center;}
+.lineDeliverArea{padding-left: 25px;width: 210px;}
+.lineDeliver_partl{width: 178px;text-align: center;color: #666;font-family: 'microsoft yahei';font-size: 14px;}
+.lineDeliver_partmCont td{height: 50px;}
+.lineDeliver_city{width: 98px;padding:0 10px; text-align: center;color: #666;font-family: 'microsoft yahei';font-size: 14px;}
+.lineDeliver_city span{
+    display: inline-block;
+    max-width: 98px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+.lineDeliver_sch{width: 180px;text-align: center;color: #666;font-family: 'microsoft yahei';font-size: 14px;}
+.lineDeliver_area{padding-left: 25px;width: 210px;color: #666;font-family: 'microsoft yahei';font-size: 14px;}
+.lineDeliver_area span{display: inline-block;max-width: 200px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; word-wrap: normal;}
+.lineDeliver_sch span{display: inline-block;max-width: 180px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; word-wrap: normal;}
+.informationContList{display:none;width:800px;overflow: hidden;padding-top:20px;}
+.questCont{background: #fff;}
+.questTime{padding:5px 0; color: #cccccc;font-family: 'microsoft yahei';font-size: 12px;text-align: center;cursor: pointer;}
+.questerPhoto{overflow: hidden;width: 40px;height: 40px;border-radius: 50%;margin-right:15px;} 
+.quester,.questHr{padding-top:5px;}
+.quester{text-align: left;}
+.questHr{text-align: right}
+.questHr .chaterPhoto{margin-left: 15px;}                                              
+.questerChat{display: inline-block;padding:6px 8px;border-radius: 5px; border:1px solid #ececec; color: #333;font-family: 'microsoft yahei';font-size: 12px;}
+.questerChat i{width: 6px;height: 5px;background-position: -240px -161px;left: -6px;top:6;}
+.questerChatHr{display: inline-block;margin-top: 22px; text-align: left; padding:3px 8px;border-radius: 5px; border:1px solid #99d7ef;background: #c3eeff; color: #333;font-family: 'microsoft yahei';font-size: 12px;}
+.questerChatHr span{display: inline-block;max-width: 200px;}
+.questerChatHr i{width: 7px;height: 4px;background`-position: -200px -161px;right: -7px;top:5px;}
+.chatQuestCont-list{display: none;padding:0 15px;  overflow: auto;max-height: 242px;min-height:242px;background: #fff}
+.progressBar span{display: inline-block;height: 8px;border-radius: 5px;}
+.progressBar-Blue span{background: #27b3e9;width: 80px}
+.progressBar-Blue em{font-family: 'microsoft yahei';font-size: 12px;color: #27b3e9}
+.progressBar-gray span{background: #e2e2e2;width: 30px}
+.progressBar-gray em{font-family: 'microsoft yahei';font-size: 12px;color: #999999}
+
+.selectTite{border-radius: 5px; font-weight: normal;cursor:pointer;top:-7px; width: 70px; padding:6px 8px 6px 10px; border:1px solid #f1f1f1;font-family: 'microsoft yahei';font-size: 12px;color: #666}
+.selectTite i{right: 6px;top:13px; width: 13px;height: 7px;background-position: -1px -160px;vertical-align: middle;}
+.selectTite span{max-width: 60px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;word-wrap: normal;display: inline-block;}
+.selectCont{max-height: 210px;overflow-y: auto;display: none; width: 98%; background: #fff;border:1px solid #f1f1f1;border-top:none;}
+.selectCont li{max-width: 70px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap; word-wrap: normal;cursor: pointer;padding: 6px 0;padding-left: 10px; font-weight: normal;font-family: 'microsoft yahei';font-size: 12px;color: #666}
+.chaterInfor{width: 75%}
+
+.chaterInfor .chaterName{max-width: 95px;}
+.questerContent{width: 78%;}
+.questHrContent{text-align: right;position: relative;}
+.questHrContent .chaterName{max-width: 95px;right: 0;top: 0;position: absolute;}
+.detail-videoCont{height: 485px;width: 860px}
+/**在路上class**/
+/*.detail-videoShadow{width: 860px;height: 486px;background: #000;top:0;left:0;opacity: 0.3;filter:Alpha(opacity=30);z-index: 10;}
+.detail-playIcon{cursor: pointer; width: 100px;height: 100px;background-position:-393px -201px;;z-index: 20;top:41%;left: 44.2%;}*/
+.careerTalkInfor{width: 800px;overflow: hidden;}
+
+.careerTalkInfor p{line-height: 30px;}
+.switchIcon{cursor: pointer;width: 20px;height: 20px;background-position:-119px -285px;z-index: 20;top:14px;right:50px;z-index:900}
+.ppt{bottom: 35px;left: 0;z-index: 100;}
+.pptList{border:1px solid #0b0605;width: 217px;height: 122px;overflow: hidden;}
+.pptList img{width: 217px;height: 122px;}
+.pptList i{cursor: pointer;right: 0;top:0;width: 15px;height: 15px;background-position:-80px -240px;}
+.popCover{display: none; position: fixed; width: 100%;height: 3000px;top:0;left:0;z-index:998;background:#000;opacity: 0.5;}
+/*.popShadow{width: 100%;height: 100%;}*/
+
+.share-dimensionCode{display: none; position: fixed;width: 178px;height: 204px;left: 0;top: 0;right: 0;bottom: 0;z-index: 999;text-align: center;background:#fff;margin: auto;padding-top:7px;}
+.share-dimensionCode p{font-family: 'microsoft yahei';font-size: 14px;color:#27b3e9;}
+.share-dimensionCode img{width: 172px;height: 172px;}
+.noJobTip p{ font-size: 14px;color: #999;font-family: 'microsoft yahei';font-weight: normal;padding-top: 110px;text-align: center;}
+.smallPop{cursor: pointer;width: 20px;height: 19px;background-position:-80px -285px;top: 14px;right: 22px;z-index:900}
+.videoMain{top:0px;left:0px;width: 860px;height: 485px;}

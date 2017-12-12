@@ -41,7 +41,8 @@ module.exports = {
     // },
     output: {
         path: config.build.assetsRoot,
-        filename: 'js/[name].js',
+        filename: utils.assetsPath('js/[name].js'),
+        chunkFilename: utils.assetsPath('js/[name].js'),
         publicPath: process.env.NODE_ENV === 'production'
             ? config.build.assetsPublicPath
             : config.dev.assetsPublicPath
@@ -87,13 +88,6 @@ module.exports = {
             }
         ]
     },
-    plugins:[
-        new ExtractTextPlugin({
-            filename:  (getPath) => {
-              return getPath('css/[name].css').replace('css/js', 'css');
-            },
-            allChunks: true
-          })
-        ]
+
     
 }

@@ -65,7 +65,7 @@ class Article extends Component {
                 <div className="p-author">By {articleInfo.author} {articleInfo.createTime}</div>
                 <div className="p-second-header"></div>
                 <div className="p-content">
-                    <img src="img/2017-07-07-01.jpg" alt="" title="笑的真甜" className="w100" />
+                    <img src={`${config.cdnurl}${articleInfo.headImg}`} alt="" title={articleInfo.headImgInfo} className="w100" />
                     <div dangerouslySetInnerHTML={{
                         __html: contentHtml
                     }}></div>

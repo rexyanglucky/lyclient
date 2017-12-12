@@ -1,0 +1,85 @@
+/**公共头部**/
+a:hover{
+	text-decoration: none;
+}
+button{}
+i{background: url('../img/sky-careerTalk.png') no-repeat;display: inline-block;}
+.headWrap{
+	width: 100%;
+	border:1px solid #ededed;
+	height: 60px;
+}
+.headBox{
+	width:1200px;
+	
+}
+.head-logo{
+	width:151px;
+	padding:10px 0;
+	margin-right: 48px;
+}
+.head-logo a{
+	display: block;
+    height: 38px;
+    background: url('../img/logoImg.jpg') no-repeat;
+}
+.headTab li{
+	padding:0 21px;
+	height: 58px;
+	line-height: 58px;
+}
+.headTab li a{
+	display: block;
+	font-family: 'microsoft yahei';
+	font-size: 16px;
+	color: #666666;
+}
+.headTab li .acurrent{
+	border-bottom: 2px solid #27b3e9;
+	color: #27b3e9;
+}
+.headRight li{
+	height: 58px;
+	line-height: 58px;
+
+}
+.headRight li a{
+	display: block;
+	font-family: 'microsoft yahei';
+	font-size: 16px;
+	color: #999999;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    max-width: 150px;
+}
+.loginItem {
+    padding: 0 11px 2px 0;
+    background: url(../img/headLine.jpg) no-repeat right center;
+}
+.registerItem {
+    padding: 0 0px 2px 11px;
+}
+.companyName {
+    padding: 0 40px;
+}
+.mobileIcon a {
+    width: 15px;
+    height: 28px;
+    background: url(../img/sky-careerTalk.png) no-repeat;
+    background-position: -41px -42px;
+    margin-top: 14px;
+}
+.footerWrap{position:relative;width:100%;background: #333333;bottom:0;left: 0;padding:30px 0 15px 0;;}
+.footerBox{width: 1200px;margin: auto}
+.footerL{margin-right: 20px;}
+.sky-careerTalkTxt{margin-bottom: 20px; font-family: 'microsoft yahei';font-size: 20px;color:#fff;font-weight: normal;}
+.TxtFi,.TxtTw,.TxtTr{margin-right: 56px; font-family: 'microsoft yahei';font-size: 16px;color:#fff;}
+.TxtFi i{margin-right: 15px; width:21px;height:21px;background-position:-400px -3px;vertical-align: middle;}
+.TxtTw i{margin-right: 15px;width:26px;height:26px;background-position:-440px -3px;vertical-align: middle;}
+.TxtTr i{margin-right: 15px;width:26px;height:24px;background-position:0 -44px;vertical-align: middle;}
+.lawSecrecy{padding: 20px 0 10px 0;font-family: 'microsoft yahei';color: #b4b4b4}
+.copyrightTxt{font-family: 'microsoft yahei';font-size:14px;color: #c0c0c0}
+.footerR p{text-align: center; padding-top: 21px; font-family: 'microsoft yahei';font-size:14px;color: #b4b4b4}
+.lawSecrecy a{font-family: 'microsoft yahei';font-size:14px;color: #c0c0c0}

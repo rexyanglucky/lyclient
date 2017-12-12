@@ -11,9 +11,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
-// const loadMinified = require('./load-minified')
-
 
 const env = require('../config/prod.env')
 
@@ -51,6 +48,11 @@ const webpackConfig = merge(baseWebpackConfig, {
       // codesplit chunks into this main css file as well.
       // This will result in *all* of your app's CSS being loaded upfront.
       allChunks: false,
+      // filename:  (getPath) => {
+      //   return getPath('css/[name].css').replace('css/js', 'css');
+      // },
+      // allChunks: true
+
     }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
@@ -59,12 +61,25 @@ const webpackConfig = merge(baseWebpackConfig, {
         ? { safe: true, map: { inline: false } }
         : { safe: true }
     }),
-    // generate dist index.html with correct asset hash for caching.
-    // you can customize output by editing /index.html
-    // see https://github.com/ampedandwired/html-webpack-plugin
+     new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'src/html/index.html',
+      inject: true,
+      chunks: ['index\\index','vendor','manifest'],
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency',
+    }),
     new HtmlWebpackPlugin({
-      filename: config.build.index,
-      template: 'public/index.html',
+      filename: 'test.html',
+      template: 'src/html/test.html',
+      chunks: ['test\\test','vendor','manifest'],
       inject: true,
       minify: {
         removeComments: true,
@@ -75,9 +90,23 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
-      // serviceWorkerLoader: `<script>${loadMinified(path.join(__dirname,
-      //   './service-worker-prod.js'))}</script>`
     }),
+    new HtmlWebpackPlugin({
+      filename: 'about.html',
+      template: 'src/html/about.html',
+      chunks: ['','vendor','manifest'],
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency',
+    }),
+
     // keep module.id stable when vender modules does not change
     new webpack.HashedModuleIdsPlugin(),
     // enable scope hoisting
@@ -115,19 +144,12 @@ const webpackConfig = merge(baseWebpackConfig, {
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../public'),
+        from: path.resolve(__dirname, '../static'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
     ]),
-    // service worker caching
-    new SWPrecacheWebpackPlugin({
-      cacheId: 'my-vue-app',
-      filename: 'service-worker.js',
-      staticFileGlobs: ['dist/**/*.{js,html,css}'],
-      minify: true,
-      stripPrefix: 'dist/'
-    })
+
   ]
 })
 

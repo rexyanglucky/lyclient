@@ -1,0 +1,51 @@
+button{outline:none}
+body{overflow-x: hidden;}
+.numBox{ width:26px; height:44px; background:#f5f5f5; overflow:hidden; position:relative; float:left; margin-right:4px;  border-radius:5px;-moz-border-radius:5px;-ms-border-radius:5px;-o-border-radius:5px;-webkit-border-radius:5px;}
+.numList{ position:absolute; left:0; width:26px;}
+.numList li{ width:26px; height:44px; text-align:center; line-height:44px; color:#aaa; font-size:30px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;}
+
+.loginItem{padding:0 11px 2px 0;background:url('../img/headLine.jpg') no-repeat right center;}
+.registerItem{padding:0 0px 2px 11px;}
+.companyName{padding:0 40px;}
+.mobileIcon a{width: 15px;height: 28px;background: url('../img/sky-careerTalk.png') no-repeat;background-position: -41px -42px;margin-top: 14px;}
+.sky-careerTalkBanner{height: 420px;}
+.banner{width:100%;height: 420px;overflow: hidden;}
+.picList{height: 420px;width: 200%}
+.picList li {
+    float: left;
+    height: 420px;
+    width: 50%;
+    overflow: hidden;
+    position: relative;
+}
+.picList img {
+    position: relative;
+    left: 50%;
+    margin-left: -960px;
+    height: 420px;
+    width: 1920px;
+}
+.dots{bottom:0;width:727px;left: 50%;margin-left: -364px;font-size: 0;text-align: center;}
+.dots li{cursor: pointer;}
+
+.cIcon_bannerRound{display: inline-block; font-family: 'microsoft yahei';margin-right: 1px;font-size: 12px;color: #fff;width: 120px;height: 26px;line-height: 26px; text-align: center; background: url('../img/shadow.png') no-repeat;}
+.cIcon_bannerRound span{display: inline-block; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; word-wrap: normal;max-width:110px }
+.advRight{width: 1200px;margin:auto;top:-378px;z-index: 500}
+.advRight ul{right: 0; top:0;width: 186px;height: 340px; background: url('../img/advRightBg.png') no-repeat;}
+.advRight ul li{width: 170px; height: 76px;margin-left:8px;margin-top: 6px;}
+.advRight ul li a{display: block;}
+.dots li.aCur{cursor: pointer; margin-right: 1px; width: 120px;height: 40px;text-align: center;line-height: 40px;background: url('../img/shadowH.png') no-repeat;margin-top:-14px;}
+.shadowHover{opacity: 0.9;filter:Alpha(opacity=90); display: none; z-index: 600;padding-top: 19px; left: 0;top:0; width: 170px; height: 76px;text-align: center; background: url('../img/shadowHover.png') no-repeat;}
+.shadowHover span,.shadowHover em{line-height: 20px; font-family: 'microsoft yahei';font-size: 14px;color:#fff;}
+.advRight ul li a:hover .shadowHover{display: block;}
+
+/*职位专业下拉*/
+.search_type_Warp{}
+.search_type_Warp .tab_title li{
+	display: inline-block;
+height: 50px;padding: 0 24px;background: #aaa;
+}
+.search_type_Warp .tab_title li.tactive{
+background: blue;
+}
+
