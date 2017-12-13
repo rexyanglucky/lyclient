@@ -8,7 +8,7 @@ $(function () {
         }
     });
 
-    // $(".banner").slider();
+    $(".banner").slider();
     $(".dots li").live({
         mouseover: function () {
             $(this).addClass("hover");
@@ -31,6 +31,9 @@ $(function () {
     $(".playback-company li:last").css("border-bottom", "none");
     $("#kxad li:first").css("padding-top", "5px");
 
+    $('.search_type_warp .tab_title_item').click(function(){
+        $(this).addClass("tactive").siblings().removeClass("tactive");
+    })
 
 
     //今日新增职位

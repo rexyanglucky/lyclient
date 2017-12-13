@@ -1,5 +1,8 @@
 button{outline:none}
-body{overflow-x: hidden;}
+body{overflow-x: hidden;background: #f6f9fb;
+font-family: 'microsoft yahei';
+font-size: 14px;
+}
 .numBox{ width:26px; height:44px; background:#f5f5f5; overflow:hidden; position:relative; float:left; margin-right:4px;  border-radius:5px;-moz-border-radius:5px;-ms-border-radius:5px;-o-border-radius:5px;-webkit-border-radius:5px;}
 .numList{ position:absolute; left:0; width:26px;}
 .numList li{ width:26px; height:44px; text-align:center; line-height:44px; color:#aaa; font-size:30px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;}
@@ -35,17 +38,176 @@ body{overflow-x: hidden;}
 .advRight ul li{width: 170px; height: 76px;margin-left:8px;margin-top: 6px;}
 .advRight ul li a{display: block;}
 .dots li.aCur{cursor: pointer; margin-right: 1px; width: 120px;height: 40px;text-align: center;line-height: 40px;background: url('../img/shadowH.png') no-repeat;margin-top:-14px;}
-.shadowHover{opacity: 0.9;filter:Alpha(opacity=90); display: none; z-index: 600;padding-top: 19px; left: 0;top:0; width: 170px; height: 76px;text-align: center; background: url('../img/shadowHover.png') no-repeat;}
+.shadowHover{ display: none; z-index: 600; width: 100%; height: 100%; box-sizing: border-box; text-align: center; background-color: rgba(0,0,0,0.7); top: 0;left: 0;position: absolute; }
+.shadowHover_text{display: none;padding: 24px 0;z-index: 600; width: 100%; height: 100%; box-sizing: border-box; text-align: center;  top: 0;left: 0;position: absolute; }
+.shadowHover_text p{line-height: 32px;font-size: 18px; color: #fff;}
 .shadowHover span,.shadowHover em{line-height: 20px; font-family: 'microsoft yahei';font-size: 14px;color:#fff;}
 .advRight ul li a:hover .shadowHover{display: block;}
-
-/*职位专业下拉*/
-.search_type_Warp{}
-.search_type_Warp .tab_title li{
+/***小图标 start***/
+.icon_common{
+	background-image: url('../img/icon_floor_title.png');
+	background-repeat: no-repeat;
 	display: inline-block;
-height: 50px;padding: 0 24px;background: #aaa;
 }
-.search_type_Warp .tab_title li.tactive{
-background: blue;
+
+.icon_common.icon_diamond{
+	background-position: -10px -10px;
+	width: 36px;
+	height: 30px;
 }
+.icon_common.icon_internet{
+	background-position: -20px -10px;
+	width: 38px;
+	height: 36px;
+}
+.icon_common.icon_search_more{
+	background-position: -20px -10px;
+	width: 38px;
+	height: 36px;
+}
+/***小图标 end***/
+/***************搜索框 start****************/
+.search_warp{width: 1200px;}
+/***************搜索框 end****************/
+/***************职位专业下拉 start****************/
+.search_type_warp{width: 1200px;}
+.search_type_warp .tab_title{font-size: 0;}
+.search_type_warp .tab_title .tab_title_item{
+display: inline-block;
+height: 50px;
+/* padding: 0 22px; */
+width: 118px;
+text-align: center;
+line-height: 50px;
+font-size: 18px;
+background: #fff;
+cursor: pointer;
+}
+
+.tab_content{
+	background: #191d1f;
+	color: #eeeeee;
+	width: 236px;
+	position: absolute;
+	display: none;
+	z-index: 1;
+	font-size: 14px;
+	left: 0;
+	top: 50px;
+}
+.search_type_warp .tab_title .tab_title_item.tactive{
+	background: #55b1e4;
+	color: #fff;
+}
+.search_type_warp .tab_title .tab_title_item.tactive .tab_content{
+	display: block;
+}
+.tab_content .tab_content_title{height: 420px;}
+.tab_content .content_item{padding: 14px 0 14px 16px;}
+.tab_content .content_item:hover{background: #373b3d;}
+.tab_content .content_item .content_item_dis{color: #c6c6c6;width: 70px;float: left;}
+.tab_content .content_item .content_item_dis.weight{color: #fff;font-size: 16px;width: 72px;float: left;}
+
+.tab_content .tab_content_detail{
+	display: none;
+	position: absolute;
+	padding: 0 0 0 20px;
+	width: 620px;height: 420px;background:#373b3d;
+	left: 236px;
+	top: 0;
+}
+.tab_content_detail .detail_title{
+	border-bottom: solid 1px #474a4c;
+	font-size: 16px;
+	height: 46px;
+	line-height: 46px;
+}
+
+.tab_content_detail .detail_all a{
+	white-space: nowrap;
+	color: #c6c6c6;
+	margin: 30px 30px 0 0;
+	float: left;
+}
+.tab_content_detail .detail_all a:hover{
+	white-space: nowrap;
+	color: #fff;
+	text-decoration: underline;
+	
+}
+
+.tab_content .content_item:hover .tab_content_detail{display: block;}
+/**************职位专业下拉 end***************/
+
+.main_conent_warp{
+	width: 1200px;
+}
+/****品牌专区 start***/
+.main_conent_warp .brand_warp{
+	border: solid 1px #e2e2e2;
+	margin-left: -1px;
+	/* border-top: none; */
+	background: #fff;
+	margin: 60px 0 40px 0;
+}
+.main_conent_warp .head_line{
+	background-image: url('../img/floor_title_bg.png');
+	background-repeat: no-repeat;
+}
+.brand_warp .head_line{
+	height: 70px;
+	line-height: 70px;
+	font-size: 22px;
+	color: #fff;
+	/* background: blue; */
+	background-position: -10px -10px;
+}
+.brand_warp ul li{
+	position: relative;
+}
+.brand_warp li a{
+	border-top: #eeeeee 1px solid;
+	border-right: #eeeeee 1px solid;
+	display: block;
+	box-sizing: border-box;
+	height: 118px;
+	text-align: center;
+	/*IE hack*/
+	*font-size:118px;
+}
+/*图片上下居中*/
+.brand_warp li a:after{
+	content: '';
+	display:inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+.brand_warp ul li:hover .shadowHover,.brand_warp ul li:hover .shadowHover_text{
+	display: block;
+}	
+
+.brand_warp ul li a img{
+	max-width: 100%;
+	vertical-align: middle;
+}
+.brand_left{
+	width: 378px;
+	float: left;
+}
+.brand_left ul li a{
+		padding: 22px 50px;
+}
+.brand_right{
+	margin-left: 378px;
+}
+.brand_right ul li{
+	float: left;
+}
+.brand_right ul li a{
+	padding: 22px 24px;
+	width: 205px;
+}
+/****品牌专区 end***/
+
+
 
