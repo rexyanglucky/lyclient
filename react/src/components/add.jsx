@@ -21,6 +21,7 @@ class Add extends Component {
             content: '',
             author: 'rex',
             headImg: '',
+            headImgBase64:''
         };
         this.postData=new FormData();
         this.handleChange = this.handleChange.bind(this);
@@ -124,10 +125,12 @@ class Add extends Component {
     saveArticle() {
         let self = this;
         self.setState({ content: self.smde.value() });
-        
         setTimeout(() => {
             // let param = self.state;
-            self.postData.set('content', self.state.content);
+            self.postData.append('content', self.state.content);
+            self.postData.append('title', self.state.title);
+            self.postData.append('headImg', self.state.headImg);
+            self.postData.append('author', self.state.author);
             let param = self.postData;
             axios.post(config.url + "/article/add", param).then((response) => {
                 if (response.data) {
@@ -145,20 +148,29 @@ class Add extends Component {
         if (target.type === "file") {
             let file = target.files[0];
             var supportedTypes = ['image/jpg', 'image/jpeg', 'image/png'];
+            
+            let size=file.size/(1024*1024);
+            if(size>4){
+                alert("文件超过4M");
+                return false;
+            }
             if (file && supportedTypes.indexOf(file.type) >= 0) {
                 let oReader = new FileReader();
                 oReader.onload = function (e) {
-                    self.setState({ headImg: e.target.result });
+                    self.setState({ headImgBase64: e.target.result });
                 }
                 oReader.readAsDataURL(file)
-                self.postData.set(name,file);
+               self.setState({[name]:file});
+                // self.postData.set(name,file);
             }
             else{alert('只支持图片格式');}
         }
         else {
             let value = target.type === "checkbox" ? target.checked : target.value;
             self.setState({ [name]: value });
-            self.postData.set(name,value);
+            console.log(self.postData);
+            // self.postData.set(name,value);
+ 
           
         }
     }
@@ -168,7 +180,7 @@ class Add extends Component {
             <div className='add_content'>
                 <label htmlFor="headImg"></label>
                 <input type="file" id="headImg" name="headImg" onChange={this.handleChange} />
-                <img src={this.state.headImg} alt="" className='head_img_preview w100'/>
+                <img src={this.state.headImgBase64} alt="" className='head_img_preview w100'/>
                 <p>
                     <label htmlFor="title">标题</label>
                     <input id='title' name='title' value={this.state.title} onChange={this.handleChange}></input>
