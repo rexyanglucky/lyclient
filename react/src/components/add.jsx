@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import axios from 'axios';
 import config from '../config';
+import dataBlob from '../lib/dataBlob';
 import SimpleMDE from 'simplemde'
 import marked from 'marked'
 import highlight from 'highlight.js'
@@ -21,9 +22,11 @@ class Add extends Component {
             content: '',
             author: 'rex',
             headImg: '',
-            headImgBase64:''
+            headImgBase64: '',
+            headImgBase64Small: '',
+            headImgFileName:'',
         };
-        this.postData=new FormData();
+        this.postData = new FormData();
         this.handleChange = this.handleChange.bind(this);
         this.saveArticle = this.saveArticle.bind(this);
         /*   this.simplemde = new SimpleMDE({
@@ -129,7 +132,7 @@ class Add extends Component {
             // let param = self.state;
             self.postData.append('content', self.state.content);
             self.postData.append('title', self.state.title);
-            self.postData.append('headImg', self.state.headImg);
+            self.postData.append('headImg', self.state.headImg,self.state.headImgFileName);
             self.postData.append('author', self.state.author);
             let param = self.postData;
             axios.post(config.url + "/article/add", param).then((response) => {
@@ -148,30 +151,54 @@ class Add extends Component {
         if (target.type === "file") {
             let file = target.files[0];
             var supportedTypes = ['image/jpg', 'image/jpeg', 'image/png'];
-            
-            let size=file.size/(1024*1024);
-            if(size>4){
+
+            let size = file.size / 1024;
+            if (size > 4 * 1024) {
                 alert("文件超过4M");
                 return false;
             }
+
             if (file && supportedTypes.indexOf(file.type) >= 0) {
                 let oReader = new FileReader();
                 oReader.onload = function (e) {
+                    if (size >= 200) {
+                        let can = document.createElement("canvas");
+                        let cxt = can.getContext("2d");
+                        //加载图片获取图片真实宽度和高度  
+                        var image = new Image();
+                        image.onload = function () {
+                            let width = image.width;
+                            let height = image.height;
+                            can.width = width;
+                            can.height = height;
+                            cxt.drawImage(image, 0, 0);
+                            let dataUrl = can.toDataURL(file.type, 0.4);
+                            let realData = dataBlob.dataURLtoBlob(dataUrl,file.name);
+
+                            self.setState({ headImgBase64Small: dataUrl });
+                            self.setState({ [name]: realData });
+                            
+                        };
+                        image.src = e.target.result;
+                    }
                     self.setState({ headImgBase64: e.target.result });
                 }
                 oReader.readAsDataURL(file)
-               self.setState({[name]:file});
-                // self.postData.set(name,file);
+                if (size < 200) {
+                    self.postData.set(name, file);
+                }
+                //设置文件名字
+                self.setState({ headImgFileName: file.name });
             }
-            else{alert('只支持图片格式');}
+            else { alert('只支持图片格式'); }
         }
         else {
             let value = target.type === "checkbox" ? target.checked : target.value;
             self.setState({ [name]: value });
             console.log(self.postData);
             // self.postData.set(name,value);
- 
-          
+
+
         }
     }
     render() {
@@ -180,7 +207,8 @@ class Add extends Component {
             <div className='add_content'>
                 <label htmlFor="headImg"></label>
                 <input type="file" id="headImg" name="headImg" onChange={this.handleChange} />
-                <img src={this.state.headImgBase64} alt="" className='head_img_preview w100'/>
+                <img src={this.state.headImgBase64} alt="" className='head_img_preview w100' />
+                <img src={this.state.headImgBase64Small} alt="" className='head_img_preview w100' />
                 <p>
                     <label htmlFor="title">标题</label>
                     <input id='title' name='title' value={this.state.title} onChange={this.handleChange}></input>

@@ -26,7 +26,7 @@ class ArticleItem extends Component {
                         {/* <p className="article" dangerouslySetInnerHTML={{
                         __html: contentHtml
                     }}></p> */}
-                    <p>{article.content.replace(/<\/?.+?>/g,"")}</p>
+                    <p>{article.content?article.content.replace(/<\/?.+?>/g,""):""}</p>
                         <ArticleItemMsg />
                     </div>
                     {article.headImg && (<div className="right">
