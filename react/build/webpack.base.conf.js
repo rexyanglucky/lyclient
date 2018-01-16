@@ -85,9 +85,33 @@ module.exports = {
                     limit: 10000,
                     name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
                 }
-            }
+            },
+            // {
+            //     test: /\.ejs?$/,
+            //     loader: 'ejs-loader',
+            //     query: { 
+            //         variable: 'data', 
+            //         interpolate : '\\{\\{(.+?)\\}\\}', 
+            //         evaluate : '\\[\\[(.+?)\\]\\]' 
+            //     }
+            // },
+            {test: /\.ejs$/, loader: 'ejs-compiled-loader?htmlmin'} // enable here
+            // {
+            //     test: /\.ejs$/,
+            //     loader: 'ejs-html-loader',
+            //     options: {
+            //       title: 'The Ant: An Introduction',
+            //       season: 1,
+            //       episode: 9,
+            //       production: process.env.ENV === 'production'
+            //     }
+            //   }
+
         ]
     },
 
     
 }
+
+
+

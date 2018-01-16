@@ -23,8 +23,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   devServer: {
     historyApiFallback: true,
     hot: true,
-    host: process.env.HOST ||  config.dev.host,
-    port: process.env.PORT ||  config.dev.port,
+    host: process.env.HOST || config.dev.host,
+    port: process.env.PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
     overlay: config.dev.errorOverlay ? {
       warnings: false,
@@ -64,31 +64,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'src/html/index.html',
-      inject: true,
-      chunks: ['index\\index']
-      // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
-      //   './service-worker-dev.js'), 'utf-8')}</script>`
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'test.html',
-      template: 'src/html/test.html',
-      chunks: ['test\\test'],
-      inject: true,
-      // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
-      //   './service-worker-dev.js'), 'utf-8')}</script>`
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'about.html',
-      template: 'src/html/about.html',
-      chunks: [''],
-      inject: true,
-      // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
-      //   './service-worker-dev.js'), 'utf-8')}</script>`
-    }),
-
     new ExtractTextPlugin({
       filename: (getPath) => {
         return getPath('css/[name].css').replace('css/js', 'css');
@@ -98,7 +73,26 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   ]
 })
+let files = fs.readdirSync(path.resolve(__dirname, "..", "src/html"));
+(function (files) {
+  console.log(files);
+  for (let k = 0; k < files.length; k++) {
+    let f = files[k];
+    let chunks = f.replace(/[.]html/g, "").replace(/[.].htm/g, "");
+    console.log(chunks);
+    let htmlWebpackPlugin = new HtmlWebpackPlugin({
+      filename: f,
+      template: `src/html/${f}`,
+      inject: true,
+      chunks: [`${chunks}\\index`, 'vendor', 'manifest']
+      // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
+      //   './service-worker-dev.js'), 'utf-8')}</script>`
+    });
+    devWebpackConfig.plugins.push(htmlWebpackPlugin);
+  }
 
+
+})(files)
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port
   portfinder.getPort((err, port) => {

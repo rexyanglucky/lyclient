@@ -61,11 +61,11 @@ const webpackConfig = merge(baseWebpackConfig, {
         ? { safe: true, map: { inline: false } }
         : { safe: true }
     }),
-     new HtmlWebpackPlugin({
+    new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/html/index.html',
       inject: true,
-      chunks: ['index\\index','vendor','manifest'],
+      chunks: ['index\\index', 'vendor', 'manifest'],
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -79,7 +79,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: 'test.html',
       template: 'src/html/test.html',
-      chunks: ['test\\test','vendor','manifest'],
+      chunks: ['test\\test', 'vendor', 'manifest'],
       inject: true,
       minify: {
         removeComments: true,
@@ -94,7 +94,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: 'about.html',
       template: 'src/html/about.html',
-      chunks: ['','vendor','manifest'],
+      chunks: ['', 'vendor', 'manifest'],
       inject: true,
       minify: {
         removeComments: true,
@@ -138,7 +138,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       name: 'app',
       async: 'vendor-async',
       children: true,
-      minChunks: 3,
+      minChunks: 1,
     }),
 
     // copy custom static assets
@@ -175,5 +175,36 @@ if (config.build.bundleAnalyzerReport) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
+let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
+; (function ( files) {
+  for (let k = 0; k < files.length; k++) {
+    let f = files[k];
+    // let chunks = f.replace(/[.]html/g, "").replace(/[.].htm/g, "");
+    let chunks = f;
+    console.log(chunks);
+    if(chunks==="common"){continue;}
+    let htmlWebpackPlugin = new HtmlWebpackPlugin({
+      filename: f+".html",
+      // template: `src/html/${f}`,
+      // template: `src/ejs/common/layout.ejs`,
+      template: `src/ejs/${chunks}/template.js`,
+      inject: true,
+      chunks: [`${chunks}\\index`, 'vendor', 'manifest'],
+      // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
+      //   './service-worker-dev.js'), 'utf-8')}</script>`
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency',
+    });
 
-module.exports = webpackConfig
+    webpackConfig.plugins.push(htmlWebpackPlugin);
+  }
+
+})(files);
+module.exports = webpackConfig;
