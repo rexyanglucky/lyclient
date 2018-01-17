@@ -73,16 +73,28 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   ]
 })
-let files = fs.readdirSync(path.resolve(__dirname, "..", "src/html"));
+let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
 (function (files) {
-  console.log(files);
   for (let k = 0; k < files.length; k++) {
     let f = files[k];
-    let chunks = f.replace(/[.]html/g, "").replace(/[.].htm/g, "");
+    // let chunks = f.replace(/[.]html/g, "").replace(/[.].htm/g, "");
+    let chunks = f;
+    if (chunks === "common") { continue; }
     console.log(chunks);
+    let template = path.resolve(__dirname, "..", `src/ejs/${chunks}/template.js`);
+   
+    //判断template 是否存在, 若不存在使用默认配置
+    if (fs.existsSync(template)) {
+      template=`src/ejs/${chunks}/template.js`;
+    }
+    else{
+      template = `src/ejs/common/defaultTemplate.js`;
+    }
+    console.log(template);
     let htmlWebpackPlugin = new HtmlWebpackPlugin({
-      filename: f,
-      template: `src/html/${f}`,
+      filename: f + ".html",
+      // template: `src/html/${f}`,
+      template: template,
       inject: true,
       chunks: [`${chunks}\\index`, 'vendor', 'manifest']
       // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
@@ -90,9 +102,9 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/html"));
     });
     devWebpackConfig.plugins.push(htmlWebpackPlugin);
   }
-
-
 })(files)
+
+
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port
   portfinder.getPort((err, port) => {

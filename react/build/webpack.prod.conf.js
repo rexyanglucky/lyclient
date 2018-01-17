@@ -183,11 +183,19 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
     let chunks = f;
     console.log(chunks);
     if(chunks==="common"){continue;}
+    let template = path.resolve(__dirname, "..", `src/ejs/${chunks}/template.js`);
+    //判断template 是否存在, 若不存在使用默认配置
+    if (fs.existsSync(template)) {
+      template=`src/ejs/${chunks}/template.js`;
+    }
+    else{
+      template = `src/ejs/common/defaultTemplate.js`;
+    }
     let htmlWebpackPlugin = new HtmlWebpackPlugin({
       filename: f+".html",
       // template: `src/html/${f}`,
-      // template: `src/ejs/common/layout.ejs`,
-      template: `src/ejs/${chunks}/template.js`,
+      // template: `src/ejs/common/layout.js`,
+      template: template,
       inject: true,
       chunks: [`${chunks}\\index`, 'vendor', 'manifest'],
       // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,

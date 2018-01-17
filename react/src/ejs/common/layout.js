@@ -1,6 +1,6 @@
-const footer = require("footer.ejs");
-const header = require("header.ejs");
-const layout = require("layout.ejs");
+const footer = require("./footer.ejs");
+const header = require("./header.ejs");
+const layout = require("./layout.ejs");
 
 const htmlChunck = {
     footer: footer(),
@@ -18,5 +18,7 @@ module.exports = {
         return layout(realRenderData);
     }
 }
+// module.exports = layout(htmlChunck);
+
 
 

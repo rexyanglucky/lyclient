@@ -1,4 +1,5 @@
 const content = require('./content.ejs');
-const layout = require('../common/layout.js')
+const layout = require('./layout.js')
+// alert(content());
 console.log(content());
 module.exports = layout.mount({ self: content() });

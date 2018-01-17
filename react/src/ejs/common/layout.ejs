@@ -15,9 +15,15 @@
     </noscript>
 
     <%- header %>
-    <%- self %>      
-    <%- footer %>
-            <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+        <% if (self){ %>
+            <%- self %>
+         <% } else {%>
+         <div id="root">
+            <!--挂载点-->
+             </div>
+           <%}%>
+      <%- footer %>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 </body>
 
 </html>
