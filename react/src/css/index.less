@@ -1,5 +1,6 @@
 @import 'comm.less';
-
+@import (reference)  'color.less';
+@import   'btn.less';
 
 /*********轮播图 开始**************/
 
@@ -58,17 +59,18 @@ font-size: 0;
     vertical-align: top;
     box-sizing: border-box;
     padding: 0 10px;
-   border-right:dashed 1px #969696;
+    border-right:dashed 1px #969696;
 
 }
-.article-list .item{list-style: none;  font-size: 13px; color: #333;border-bottom: 1px solid #f0f0f0;}
+.article-list .item{list-style: none;  font-size: 14px; line-height: 1.66; color:@item-color;border-bottom: 1px solid #f0f0f0;}
 .article-list .item .title{font-size: 18px;font-weight: 600;}
-.article-list .item .author .item-time{color: #969696;}
+.article-list .item a.title:visited{font-size: 18px;font-weight: 600;color: @title-visited}
+.article-list .item .author .item-time{color:@item-time;}
 .article-list .item .article{line-height: 2;}
-.article-list .item .msg{font-size: 12px;color: #b4b4b4;}
+.article-list .item .msg{font-size: 12px;color:@item-msg;}
 .article-list .item .msg span{cursor: pointer;}
 .article-list .item .left{display: inline-block;vertical-align: middle;}
-.article-list .item .right{box-shadow: 1px 1px 5px #cecece;display: inline-block;vertical-align: middle;}
+.article-list .item .right{box-shadow: 1px 1px 5px #cecece;display: inline-block;vertical-align: middle;margin:0 15px;font-size: 0;}
 .article-list .item .right img{width: 150px;}
 /********文章列表 结束*********/
 

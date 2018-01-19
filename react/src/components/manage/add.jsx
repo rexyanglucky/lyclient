@@ -6,14 +6,14 @@ import {
     // Switch
 } from 'react-router-dom'
 import axios from 'axios';
-import config from '../config';
-import dataBlob from '../lib/dataBlob';
+import config from '@/config';
+import dataBlob from '@/lib/dataBlob';
 import SimpleMDE from 'simplemde'
 import marked from 'marked'
 import highlight from 'highlight.js'
-import '../css/add'
-import '../../../node_modules/simplemde/dist/simplemde.min.css';
-import '../../../node_modules/highlight.js/styles/atelier-cave-dark.css';
+import '@/css/add'
+import '../../../../node_modules/simplemde/dist/simplemde.min.css';
+import '../../../../node_modules/highlight.js/styles/atelier-cave-dark.css';
 class Add extends Component {
     constructor(props) {
         super(props);

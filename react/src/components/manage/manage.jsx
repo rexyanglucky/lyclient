@@ -4,14 +4,12 @@ import {
     Route,
     Redirect,
     Link,
-    // Link,
-    // Switch
 } from 'react-router-dom'
-
-import ArticleItem from './articleItem';
-import config from '../config';
+import ArticleItem from '@/components/common/articleItem';
+import config from '@/config';
 import axios from 'axios';
-import '../css/index';
+import '@/css/index';
+import '@/css/manage';
 class Manage extends Component {
     constructor(props) {
         super(props);
@@ -49,15 +47,16 @@ class Manage extends Component {
 
     }
     redirectAdd() {
-        // BrowserRouter.push('/add');
-        this.props.history.push('/add');
+        this.props.history.push('/manage/add');
         // this.setState({ redirectToAdd: true })
     }
     render() {
         return (
-            <div>
-                <span className="btn_add" onClick={this.redirectAdd}>Add New +</span>
-                <Link className="btn_add" to={{pathname:'/'}}>预览首页</Link>
+            <div className="content">
+                <p>
+                    <span className="btn_add" onClick={this.redirectAdd}>Add New +</span>
+                    <a  className="btn_add"  href="/">预览首页</a>
+                </p>
                 {/* {this.state.redirectToAdd && (<Redirect to={'/add'} />)} */}
                 <ul className="article-list">
                     {

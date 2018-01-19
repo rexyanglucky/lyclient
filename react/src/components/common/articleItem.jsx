@@ -16,25 +16,22 @@ class ArticleItem extends Component {
     // }
     render() {
         let article = this.props.article;
+        let content=article.content ? article.content.replace(/<\/?.+?>/g, "") : "";
+        content=content.length>100?content.substr(0,100)+'...' : content;
+
         return (
             // <Link to={{ pathname: '/article', query: { id: article._id }, search: `id=${article._id}` }}>
-            <a href={"/article.html?id=" + article._id}>
-
                 <li className="item">
                     <div className={article.headImg ? 'left w75' : 'left'}>
                         <p className="author">{article.author} <span className="item-time">{new Date(article.updateTime).toCustomRegString("yyyy-MM-dd HH:mm")}</span></p>
-                        <p className="title">{article.title}</p>
-                        {/* <p className="article" dangerouslySetInnerHTML={{
-                        __html: contentHtml
-                    }}></p> */}
-                        <p>{article.content ? article.content.replace(/<\/?.+?>/g, "") : ""}</p>
+                        <a className="title" href={"/article.html?id=" + article._id}>{article.title}</a>
+                        <p>{content}</p>
                         <ArticleItemMsg />
                     </div>
                     {article.headImg && (<div className="right">
                         <img src={`${config.cdnurl}${article.headImg}`} alt="别山举水" data-realsrc="img/teacher1.jpg" />
                     </div>)}
                 </li>
-            </a>
             // </Link>
         );
     }

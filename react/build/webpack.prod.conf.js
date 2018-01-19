@@ -191,7 +191,7 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
     else{
       template = `src/ejs/common/defaultTemplate.js`;
     }
-    let htmlWebpackPlugin = new HtmlWebpackPlugin({
+    let htmlWebpackPluginConfig= {
       filename: f+".html",
       // template: `src/html/${f}`,
       // template: `src/ejs/common/layout.js`,
@@ -209,8 +209,11 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
-    });
-
+    };
+    if(chunks==="manage"){
+      htmlWebpackPluginConfig.filename=f+"/"+ "index.html";
+    }
+    let htmlWebpackPlugin = new HtmlWebpackPlugin(htmlWebpackPluginConfig);
     webpackConfig.plugins.push(htmlWebpackPlugin);
   }
 

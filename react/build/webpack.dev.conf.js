@@ -53,6 +53,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         // { from: /^\/subpage/, to: '/views/subpage.html' },
         // // shows views/404.html on all other pages
         // { from: /./, to: '/views/404.html' },
+        { from: /^\/manage$/, to: '/manage/manage.html' },
+        { from: /^\/manage\/.*$/, to: '/manage/manage.html' },
       ],
     },
   },
@@ -80,7 +82,6 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
     // let chunks = f.replace(/[.]html/g, "").replace(/[.].htm/g, "");
     let chunks = f;
     if (chunks === "common") { continue; }
-    console.log(chunks);
     let template = path.resolve(__dirname, "..", `src/ejs/${chunks}/template.js`);
    
     //判断template 是否存在, 若不存在使用默认配置
@@ -90,8 +91,7 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
     else{
       template = `src/ejs/common/defaultTemplate.js`;
     }
-    console.log(template);
-    let htmlWebpackPlugin = new HtmlWebpackPlugin({
+    let htmlWebpackPluginConfig= {
       filename: f + ".html",
       // template: `src/html/${f}`,
       template: template,
@@ -99,7 +99,11 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
       chunks: [`${chunks}\\index`, 'vendor', 'manifest']
       // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
       //   './service-worker-dev.js'), 'utf-8')}</script>`
-    });
+    };
+    if(chunks==="manage"){
+      htmlWebpackPluginConfig.filename=f+"/"+"index.html";
+    }
+    let htmlWebpackPlugin = new HtmlWebpackPlugin(htmlWebpackPluginConfig);
     devWebpackConfig.plugins.push(htmlWebpackPlugin);
   }
 })(files)
