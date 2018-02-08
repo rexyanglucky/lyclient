@@ -40,9 +40,8 @@ if (isWeiXin()) {
         let shareConfig = {
             title: '梁语小站',
             link: url,
-            imgUrl: 'http://www.yangliangyu.com/static/img/logo.png',
-            // imgUrl: 'http://www.yangliangyu.com/static/img/teacher6.jpg',
-            desc: '快来看啊',
+            imgUrl: 'https://www.yangliangyu.com/static/img/logo.png',
+            desc: '梁语小站，分享你的故事',
             type: 'link',
             success: function () {
                 // 用户确认分享后执行的回调函数
