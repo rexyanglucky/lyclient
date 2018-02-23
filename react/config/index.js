@@ -34,7 +34,12 @@ module.exports = {
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/article': {
+        target: 'https://api.yangliangyu.com',
+        changeOrigin: true
+      }
+    },
     // devtool: 'eval-source-map',
     devtool: 'inline-source-map',
     // CSS Sourcemaps off by default because relative paths are "buggy"

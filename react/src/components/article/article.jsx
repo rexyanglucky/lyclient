@@ -4,6 +4,7 @@ import axios from 'axios';
 import '@/css/article.css';
 import marked from 'marked'
 import highlight from 'highlight.js'
+// import '../../../../node_modules/simplemde/dist/simplemde.min.css';
 import '../../../../node_modules/highlight.js/styles/atelier-cave-dark.css';
 class Article extends Component {
     constructor(props) {
@@ -61,6 +62,8 @@ class Article extends Component {
         }
         return (
             <div className="article_content">
+            <link rel="stylesheet" href="/static/markdownstyle/markdown.css"/>
+            <link rel="stylesheet" href="/static/markdownstyle/haroopad/haroopad.css"/>
                 <div className="p-header">{articleInfo.title}</div>
                 {articleInfo.author ? <div className="p-author">By {articleInfo.author} {articleInfo.createTime}</div> : ''}
                 <div className="p-second-header"></div>
@@ -68,7 +71,7 @@ class Article extends Component {
                     {
                         articleInfo.headImg ? <img src={`${config.cdnurl}${articleInfo.headImg}`} alt="" title={articleInfo.headImgInfo} className="w100" /> : ''
                     }
-                    <div dangerouslySetInnerHTML={{
+                    <div class='markdown haroopad ' dangerouslySetInnerHTML={{
                         __html: contentHtml
                     }}></div>
                 </div>

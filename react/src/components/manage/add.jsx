@@ -205,6 +205,8 @@ class Add extends Component {
 
         return (
             <div className='add_content'>
+              <link rel="stylesheet" href="/static/markdownstyle/markdown.css"/>
+            <link rel="stylesheet" href="/static/markdownstyle/haroopad/haroopad.css"/>
                 <label htmlFor="headImg"></label>
                 <input type="file" id="headImg" name="headImg" onChange={this.handleChange} />
                 <img src={this.state.headImgBase64} alt="" className='head_img_preview w100' />

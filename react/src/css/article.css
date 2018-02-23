@@ -28,6 +28,9 @@ margin: 15px 0 0 0;
 .article_content .p-content p{
     text-indent: 32px;
 }
+.article_content .p-content .markdown p{
+    text-indent: 0;
+}
 .w100{
     width: 100%;
 }
