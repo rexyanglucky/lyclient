@@ -1,0 +1,41 @@
+
+/*********主要内容 开始**************/
+.about_content{
+width: 95%;
+margin: 0 auto;
+max-width: 1198px;
+padding: 20px 0;
+box-sizing: border-box;
+font-size: 0;
+}
+
+/********关于我 开始*********/
+.about_content .info{
+    width:100%;
+    max-width: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+}
+.about_content .info .warp{
+     margin: 0 auto;
+     width: 90%;
+}
+.about_content .info .logo{
+    background: url("../img/logo.png") no-repeat;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    background-size: contain;
+    box-sizing: border-box;
+    
+}
+.about_content .info .text{
+    font-size: 14px;
+    color: #b4b4b4;
+    line-height: 1.5;
+
+}
+
+/*********关于我 结束**************/
+
+/**footer**/

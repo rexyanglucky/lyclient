@@ -58,3 +58,4 @@ typings/
 .env
 
 /react/dist
+/react-server/dist

@@ -1,0 +1,38 @@
+/*********导航栏 开始**************/
+body{
+    padding-top:65px;
+}
+.fix-nav{
+    position: fixed;
+    height: 65px;
+    border-bottom: 1px solid #f0f0f0;
+    width: 100%;
+    top: 0;
+    background: #fff;
+    z-index: 2;
+}
+
+.footer{
+    height: 65px; 
+     background: #eee;
+}
+.fix-nav .fix-nav-content,.footer .fix-nav-content{
+    width: 80%;
+    max-width: 1198px;
+    margin: 0 auto;
+    height: 100%;
+    line-height: 65px;
+}
+.fix-nav .logo,.footer .logo{
+    background: url("../img/logo.png") no-repeat;
+    height: 45px;
+    width: 45px;
+    display:inline-block;
+    background-size: contain;
+    vertical-align: middle;
+}
+.fix-nav .search{
+    display:inline-block;
+}
+/*********导航栏 结束**************/
+.footer a{cursor: pointer; color: #50d3bf;}

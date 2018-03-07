@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,shrink-to-fit=no, user-scalable=0;">
+    <meta name="theme-color" content="#000000">
+    <title>梁语小站</title>
+</head>
+
+<body>
+    <noscript>
+        You need to enable JavaScript to run this app.
+    </noscript>
+
+    <%- header %>
+        <% if (self){ %>
+            <%- self %>
+         <% } else {%>
+         <div id="root">
+            <!--挂载点-->
+             </div>
+           <%}%>
+      <%- footer %>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+</body>
+
+</html>
