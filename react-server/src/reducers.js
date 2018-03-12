@@ -1,4 +1,4 @@
-import { DEL_ARTICLE, GET_ARTICLE_LIST } from './actionType';
+import { DEL_ARTICLE, GET_ARTICLE_LIST,GET_ARTICLE_DETIAL } from './actionType';
 const ArticleState = {
     articleList: []
 }
@@ -9,7 +9,10 @@ export function Article(state = ArticleState, action) {
             break;
         case DEL_ARTICLE:
             break;
-        default:
+        case GET_ARTICLE_DETIAL:
+            return {...state,articleInfo:action.articleInfo};
+            break;
+        default: 
             break;
     }
 

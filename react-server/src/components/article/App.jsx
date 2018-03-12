@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
-
-import Article from './article';
-// import Bundle from '@/components/common/bundle';
-
-import '@/css/normalize.css';
-
-// const About = (props) => (
-//   <Bundle load={loadAbout}>
-//     {(About) => <About {...props} />}
-//   </Bundle>
-// )
+import Article from '@/containers/article';
 
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    const {match}=props;
+    this.match=match;
+  }
   componentDidMount() {
-
+    
   }
   render() {
     return (

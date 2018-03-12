@@ -21,6 +21,9 @@ class ArticleList extends Component {
     }
 
     render() {
+        if(!this.state.articleList){
+            return <p>暂无文章呢，快去添加吧</p>
+        }
         return (<ul className="article-list">
             {
                 this.state.articleList.map(item => {

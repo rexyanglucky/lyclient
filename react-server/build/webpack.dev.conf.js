@@ -96,9 +96,16 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
       // template: `src/html/${f}`,
       template: template,
       inject: true,
-      chunks: [`${chunks}\\index`, 'vendor', 'manifest']
+      chunks: [`${chunks}/index`, 'vendor', 'manifest'],
       // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
       //   './service-worker-dev.js'), 'utf-8')}</script>`
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
     };
     if(["manage","index"].indexOf(chunks)>-1){
       // htmlWebpackPluginConfig.filename=f+"/"+"index.html";

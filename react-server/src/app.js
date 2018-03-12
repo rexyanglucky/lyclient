@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router'
 import Manage from './containers/manage';
 import Index from './components/index/App';
+import router from './router'
 const RedirectWithStatus = ({ from, to, status }) => (
   <Route render={({ staticContext }) => {
     // there is no `staticContext` on the client, so
@@ -18,24 +19,18 @@ class App extends Component {
   }
   render() {
     return (
-        <Switch>
-          {/* some other routes */}
-          {/* <RedirectWithStatus
-            status={301}
-            from="/users"
-            to="/profiles"
-          />
-          <RedirectWithStatus
-            status={302}
-            from="/courses"
-            to="/dashboard"
-          /> */}
-          {/* <Route  path="/manage1" component={Manage} /> */}
-          <Route exact path="/" component={Index} />
-          <Route exact path="/manage" component={Manage} />
-          <RedirectWithStatus status={301} from="/index" to="/"/>
-
-        </Switch>
+      <Switch>
+      {
+          router.map(item=>{
+                if(item.redirect){
+                    return <RedirectWithStatus status={301} from={item.path} to={item.redirect}/>
+                }
+                else{
+                  return <Route exact={item.default} path={item.path} component={item.component} />
+                }
+            })
+       }
+      </Switch>
       
     );
   }
