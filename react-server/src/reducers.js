@@ -1,6 +1,7 @@
-import { DEL_ARTICLE, GET_ARTICLE_LIST,GET_ARTICLE_DETIAL } from './actionType';
+import {DEL_ARTICLE,GET_ARTICLE_LIST,GET_ARTICLE_DETIAL,GET_ARTICLE_LIST_ASYNC,GET_ARTICLE_DETIAL_ASYNC,GET_ARTICLE_LIST_PRE} from './actionType';
 const ArticleState = {
-    articleList: []
+    articleList: [],
+    isLoading:false
 }
 export function Article(state = ArticleState, action) {
     switch (action.type) {
@@ -12,8 +13,18 @@ export function Article(state = ArticleState, action) {
         case GET_ARTICLE_DETIAL:
             return {...state,articleInfo:action.articleInfo};
             break;
+        case GET_ARTICLE_DETIAL_ASYNC:
+            return {...state};
+            break;
+        case GET_ARTICLE_LIST_ASYNC:
+            return { ...state};
+            break;
+        case GET_ARTICLE_LIST_PRE:
+            return { ...state,isLoading:true};
+            break;
         default: 
             break;
     }
 
 }
+

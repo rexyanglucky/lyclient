@@ -2,19 +2,22 @@ import fs from 'fs'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter,matchPath } from 'react-router'
-import { createStore } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux'
+// import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import App from './App'
 import express from 'express';
 import ArticleApi from './api/article';
-import { getArticleList,getArticleDetial  } from './actions/article';
+// import { getArticleList,getArticleDetial  } from './actions/article';
 import { Article as ArticleReducer } from './reducers'
+
+import routes from "./router"
 var path = require('path');
 
 var app = new express();
 app.use(express.static('../'));
 app.use((req, res) => {
-  console.log(req.url);
   const context = {}
   if (context.url) {
     res.writeHead(301, {
@@ -22,28 +25,52 @@ app.use((req, res) => {
     })
     res.end()
   } else {
-    if(req.url.indexOf("/article")>-1){
+    // if(req.url.indexOf("/article")>-1){
+    //   const match = matchPath(req.url, {
+    //     path: '/article/:id'
+    //   })
+    //   ArticleApi.getArticleDetial(match.params.id,data=>{
+    //     var initStore = { articleInfo: data };
+    //     var store = createStore(ArticleReducer, initStore);
+    //     store.dispatch(getArticleDetial(data));
+    //     renderHtml(store,context,req,res);
+    //   })
+    // }
+    // else if(req.url.indexOf("/favicon.ico")<0){
+    //   ArticleApi.getArticleList((data) => {
+    //     var initStore = { articleList: data };
+    //     var store = createStore(ArticleReducer, initStore);
+    //     store.dispatch(getArticleList(data));
+    //     renderHtml(store,context,req,res);
+    //   })
+
+
+      
+    // }
+    // else{
+    //   res.write('404 not found');
+    //   res.end();
+    // }
+
+    const store = createStore(
+      ArticleReducer,
+      applyMiddleware(
+        thunkMiddleware // 允许我们 dispatch() 函数
+      )
+    )
+
+    for(var k=0;k<routes.length;k++){
+      var item=routes[k];
       const match = matchPath(req.url, {
-        path: '/article/:id'
+        // path: '/article/:id'
+        path:item.path
       })
-      ArticleApi.getArticleDetial(match.params.id,data=>{
-        var initStore = { articleInfo: data };
-        var store = createStore(ArticleReducer, initStore);
-        store.dispatch(getArticleDetial(data));
-        renderHtml(store,context,req,res);
-      })
-    }
-    else if(req.url.indexOf("/favicon.ico")<0){
-      ArticleApi.getArticleList((data) => {
-        var initStore = { articleList: data };
-        var store = createStore(ArticleReducer, initStore);
-        store.dispatch(getArticleList(data));
-        renderHtml(store,context,req,res);
-      })
-    }
-    else{
-      res.write('404 not found');
-      res.end();
+      if(match&&match.isExact){       
+        store.dispatch(item.initFunc(match.params)).then(()=>{
+          renderHtml(store,context,req,res);
+        })
+        break;
+      } 
     }
   }
 })
