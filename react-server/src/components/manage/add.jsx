@@ -17,6 +17,8 @@ import '../../../../node_modules/highlight.js/styles/atelier-cave-dark.css';
 class Add extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
+        const {match,getArticleDetialAsync}=props;
         this.state = {
             title: '',
             content: '',
@@ -26,9 +28,26 @@ class Add extends Component {
             headImgBase64Small: '',
             headImgFileName:'',
         };
+        if(match&&match.params&&match.params.id&&getArticleDetialAsync){
+            getArticleDetialAsync(match.params.id).then(()=>{
+                // var info=store.
+                // console.log(this.props.articleInfo);
+                // if(window){
+                //    alert(this.props.articleInfo);
+                // }
+                this.setState({...this.props.articleInfo})
+                this.initSmde();
+            });
+        }
+        else{
+            this.initSmde();
+        }
+
         this.postData = new FormData();
         this.handleChange = this.handleChange.bind(this);
         this.saveArticle = this.saveArticle.bind(this);
+        console.log(props);
+
         /*   this.simplemde = new SimpleMDE({
               autofocus: true,
               autosave: {
@@ -100,6 +119,9 @@ class Add extends Component {
 
     }
     componentDidMount() {
+    //    this.initSmde();
+    }
+    initSmde(){
         this.smde = new SimpleMDE({
             element: document.getElementById('content').childElementCount,
             autofocus: true,
@@ -209,11 +231,16 @@ class Add extends Component {
             <link rel="stylesheet" href="/static/markdownstyle/haroopad/haroopad.css"/>
                 <label htmlFor="headImg"></label>
                 <input type="file" id="headImg" name="headImg" onChange={this.handleChange} />
+
                 <img src={this.state.headImgBase64} alt="" className='head_img_preview w100' />
                 <img src={this.state.headImgBase64Small} alt="" className='head_img_preview w100' />
                 <p>
                     <label htmlFor="title">标题</label>
                     <input id='title' name='title' value={this.state.title} onChange={this.handleChange}></input>
+                </p>
+                <p>
+                    <input type="checkbox" id="isMD"/>
+                    <label htmlFor="isMD">是否markDown文件</label>
                 </p>
                 <label htmlFor="content">正文内容</label>
                 <textarea id='content' name='content' value={this.state.content} onChange={this.handleChange}></textarea>

@@ -6,16 +6,17 @@ import {
   // Link
   Switch
 } from 'react-router-dom'
-import Bundle from '@/components/common/bundle';
+// import Bundle from '@/components/common/bundle';
 
 // import Manage from './manage';
 import Manage from '@/containers/manage';
-import loadAdd from 'bundle-loader?lazy&name=manage/[name]!./add';
-const Add = (props) => (
-  <Bundle load={loadAdd}>
-    {(Add) => <Add {...props} />}
-  </Bundle>
-)
+import Add from '@/containers/add';
+// import loadAdd from 'bundle-loader?lazy&name=manage/[name]!./add';
+// const Add = (props) => (
+//   <Bundle load={loadAdd}>
+//     {(Add) => <Add {...props} />}
+//   </Bundle>
+// )
 
 class App extends Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ class App extends Component {
       <Router>
         <Switch>
         <Route exact path="/manage" component={Manage} />
+        <Route path="/manage/add/:id" component={Add} />
         <Route path="/manage/add" component={Add} />
         </Switch>
       </Router>

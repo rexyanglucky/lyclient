@@ -1,2 +1,5 @@
-import * as Article from "./article"
+import * as Actions from "./article"
+
+
+export default Actions
 

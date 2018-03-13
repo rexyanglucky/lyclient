@@ -41,15 +41,17 @@ class Manage extends Component {
             }
         });
     }
-    editArticle() {
-
+    editArticle(id) {
+        this.props.history.push(`/manage/add/${id}`);
     }
     redirectAdd() {
         this.props.history.push('/manage/add');
         // this.setState({ redirectToAdd: true })
     }
     render() {
+        
         return (
+            
             <div className="content">
                 <p>
                     <span className="btn_add" onClick={this.redirectAdd}>Add New +</span>
@@ -62,7 +64,9 @@ class Manage extends Component {
                             if (item) {
                                 return (<div key={item._id}>
                                     <ArticleItem article={item} />
-                                    <div className='op'><span className='btn' onClick={this.delArticle.bind(this, item._id)}>删除</span> <span className='btn' onClick={this.editArticle}>编辑</span> </div>
+                                    <div className='op'>
+                                        <span className='btn' onClick={this.delArticle.bind(this, item._id)}>删除</span>
+                                        <span className='btn' onClick={this.editArticle.bind(this, item._id)}>编辑</span> </div>
                                     {item._id}
                                 </div>);
                             }

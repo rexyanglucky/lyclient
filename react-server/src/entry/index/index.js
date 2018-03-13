@@ -13,8 +13,8 @@ import {Article as ArticleReducer} from '@/reducers';
 import {getArticleList} from '@/actions/article';
 const initialState = window.__INITIAL_STATE__;
 var store=createStore(ArticleReducer,initialState);
-store.dispatch(getArticleList(initialState.articleList));
-const finalState = store.getState();
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+// store.dispatch(getArticleList(initialState.articleList));
+// const finalState = store.getState();
+ReactDOM.hydrate(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 // registerServiceWorker();
 

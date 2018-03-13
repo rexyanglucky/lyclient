@@ -29,7 +29,7 @@ class ArticleItem extends Component {
                         <ArticleItemMsg />
                     </div>
                     {article.headImg && (<div className="right">
-                        <img src={`${config.cdnurl}${article.headImg}`} alt="别山举水" data-realsrc="img/teacher1.jpg" />
+                        <img src={`${config.cdnurl}${article.headImg}`} alt={article.title} data-realsrc="img/teacher1.jpg" />
                     </div>)}
                 </li>
       

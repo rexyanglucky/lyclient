@@ -52,25 +52,41 @@ app.use((req, res) => {
     //   res.end();
     // }
 
-    const store = createStore(
-      ArticleReducer,
-      applyMiddleware(
-        thunkMiddleware // 允许我们 dispatch() 函数
-      )
-    )
-
+  
+    let flag=false;
     for(var k=0;k<routes.length;k++){
       var item=routes[k];
       const match = matchPath(req.url, {
         // path: '/article/:id'
         path:item.path
       })
+      //noServerRender 设置路由，如果有 noServerRender 跳转到html指定的html页面，不做服务端渲染
+      if(match&&match.isExact&&item.noServerRender){
+        flag=true;
+        let  templateHtml = fs.readFileSync(item.index, 'utf-8');
+        res.write(templateHtml);
+        res.end()
+        break;
+      }
       if(match&&match.isExact){       
+        flag=true;
+        const store = createStore(
+          ArticleReducer,
+          applyMiddleware(
+            thunkMiddleware // 允许我们 dispatch() 函数
+          )
+        )
         store.dispatch(item.initFunc(match.params)).then(()=>{
-          renderHtml(store,context,req,res);
+          renderHtml(store,context,req,res,item);
         })
         break;
       } 
+    }
+    if(!flag){
+      // res.write('404 not found');
+      // res.end();
+      res.write('404 not found');
+      res.end();
     }
   }
 })
@@ -78,7 +94,8 @@ app.use((req, res) => {
 app.listen(3000, function () {
   console.log("server start port 3000");
 });
-function renderHtml(store,context,req,res){
+function renderHtml(store,context,req,res,item){
+
   const html = ReactDOMServer.renderToString(
     <Provider store={store}>
       <StaticRouter
@@ -93,18 +110,8 @@ function renderHtml(store,context,req,res){
 
  
   var templateHtml='';
-  if (req.url.indexOf('manage') > -1) {
-    templateHtml = fs.readFileSync("../manage/manage.html", 'utf-8');
-    templateHtml = templateHtml.replace("<div id=root></div>", `<div id=root>${html}</div><script>window.__INITIAL_STATE__ = ${JSON.stringify(finalState)}</script>`);
-  }
-  else if(req.url.indexOf('article')>-1) {
-    templateHtml = fs.readFileSync("../article.html", 'utf-8');
-    templateHtml = templateHtml.replace("<div id=root></div>", `<div id=root>${html}</div><script>window.__INITIAL_STATE__ = ${JSON.stringify(finalState)}</script>`);
-  }
-  else{
-    templateHtml = fs.readFileSync("../index/index.html", 'utf-8');
-    templateHtml = templateHtml.replace("<div id=root></div>", `<div id=root>${html}</div><script>window.__INITIAL_STATE__ = ${JSON.stringify(finalState)}</script>`);
-  }
+  templateHtml = fs.readFileSync(item.index, 'utf-8');
+  templateHtml = templateHtml.replace("<div id=root></div>", `<div id=root>${html}</div><script>window.__INITIAL_STATE__ = ${JSON.stringify(finalState)}</script>`);
   res.write(templateHtml);
 
   res.end()

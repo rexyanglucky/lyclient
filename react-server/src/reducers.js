@@ -23,6 +23,7 @@ export function Article(state = ArticleState, action) {
             return { ...state,isLoading:true};
             break;
         default: 
+            return state;
             break;
     }
 
