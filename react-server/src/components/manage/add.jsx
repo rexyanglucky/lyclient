@@ -28,8 +28,9 @@ class Add extends Component {
             headImgBase64Small: '',
             headImgFileName:'',
         };
+        this.isEdit=false;
         if(match&&match.params&&match.params.id&&getArticleDetialAsync){
-            getArticleDetialAsync(match.params.id).then(()=>{
+            getArticleDetialAsync(match.params).then(()=>{
                 // var info=store.
                 // console.log(this.props.articleInfo);
                 // if(window){
@@ -37,7 +38,9 @@ class Add extends Component {
                 // }
                 this.setState({...this.props.articleInfo})
                 this.initSmde();
+                
             });
+            this.isEdit=true;
         }
         else{
             this.initSmde();
@@ -154,10 +157,16 @@ class Add extends Component {
             // let param = self.state;
             self.postData.append('content', self.state.content);
             self.postData.append('title', self.state.title);
-            self.postData.append('headImg', self.state.headImg,self.state.headImgFileName);
+            if(this.isEdit&&!self.state.headImgFileName){
+                self.postData.append('headImg', self.state.headImg);
+            }
+            else{
+                self.postData.append('headImg', self.state.headImg,self.state.headImgFileName);
+            }
             self.postData.append('author', self.state.author);
+            self.postData.append('isMD', self.state.isMD);
             let param = self.postData;
-            axios.post(config.url + "/article/add", param).then((response) => {
+            axios.post('https:'+config.url + "/article/add", param).then((response) => {
                 if (response.data) {
                     let data = response.data.data;
                     alert('保存成功');
@@ -181,33 +190,35 @@ class Add extends Component {
             }
 
             if (file && supportedTypes.indexOf(file.type) >= 0) {
-                let oReader = new FileReader();
-                oReader.onload = function (e) {
-                    if (size >= 200) {
-                        let can = document.createElement("canvas");
-                        let cxt = can.getContext("2d");
-                        //加载图片获取图片真实宽度和高度  
-                        var image = new Image();
-                        image.onload = function () {
-                            let width = image.width;
-                            let height = image.height;
-                            can.width = width;
-                            can.height = height;
-                            cxt.drawImage(image, 0, 0);
-                            let dataUrl = can.toDataURL(file.type, 0.4);
-                            let realData = dataBlob.dataURLtoBlob(dataUrl,file.name);
+                if (size >= 200) {//大于200K 进行压缩
+                    let oReader = new FileReader();
+                    oReader.onload = function (e) {
+                        
+                            let can = document.createElement("canvas");
+                            let cxt = can.getContext("2d");
+                            //加载图片获取图片真实宽度和高度  
+                            var image = new Image();
+                            image.onload = function () {
+                                let width = image.width;
+                                let height = image.height;
+                                can.width = width;
+                                can.height = height;
+                                cxt.drawImage(image, 0, 0);
+                                let dataUrl = can.toDataURL(file.type, 0.4);
+                                let realData = dataBlob.dataURLtoBlob(dataUrl,file.name);
 
-                            self.setState({ headImgBase64Small: dataUrl });
-                            self.setState({ [name]: realData });
-                            
-                        };
-                        image.src = e.target.result;
+                                self.setState({ headImgBase64Small: dataUrl });
+                                self.setState({ [name]: realData });
+                                
+                            };
+                            image.src = e.target.result;
+                    
+                        self.setState({ headImgBase64: e.target.result });
                     }
-                    self.setState({ headImgBase64: e.target.result });
+                    oReader.readAsDataURL(file)
                 }
-                oReader.readAsDataURL(file)
-                if (size < 200) {
-                    self.postData.set(name, file);
+                else {
+                    self.setState({[name]:file});
                 }
                 //设置文件名字
                 self.setState({ headImgFileName: file.name });
@@ -230,7 +241,7 @@ class Add extends Component {
               <link rel="stylesheet" href="/static/markdownstyle/markdown.css"/>
             <link rel="stylesheet" href="/static/markdownstyle/haroopad/haroopad.css"/>
                 <label htmlFor="headImg"></label>
-                <input type="file" id="headImg" name="headImg" onChange={this.handleChange} />
+                <input type="file" id="headImg" name="headImg"  onChange={this.handleChange} />
 
                 <img src={this.state.headImgBase64} alt="" className='head_img_preview w100' />
                 <img src={this.state.headImgBase64Small} alt="" className='head_img_preview w100' />
@@ -239,7 +250,7 @@ class Add extends Component {
                     <input id='title' name='title' value={this.state.title} onChange={this.handleChange}></input>
                 </p>
                 <p>
-                    <input type="checkbox" id="isMD"/>
+                    <input type="checkbox" name='isMD' checked={this.state.isMD} id="isMD" onChange={this.handleChange}/>
                     <label htmlFor="isMD">是否markDown文件</label>
                 </p>
                 <label htmlFor="content">正文内容</label>
