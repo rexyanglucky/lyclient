@@ -27,6 +27,7 @@ class Add extends Component {
             headImgBase64: '',
             headImgBase64Small: '',
             headImgFileName:'',
+            isMD:false
         };
         this.isEdit=false;
         if(match&&match.params&&match.params.id&&getArticleDetialAsync){
@@ -41,9 +42,6 @@ class Add extends Component {
                 
             });
             this.isEdit=true;
-        }
-        else{
-            this.initSmde();
         }
 
         this.postData = new FormData();
@@ -122,7 +120,9 @@ class Add extends Component {
 
     }
     componentDidMount() {
-    //    this.initSmde();
+        if(!this.isEdit){
+          this.initSmde();
+        }
     }
     initSmde(){
         this.smde = new SimpleMDE({

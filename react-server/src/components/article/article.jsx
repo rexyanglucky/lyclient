@@ -76,7 +76,7 @@ class Article extends Component {
                         articleInfo.headImg ? <img src={`${config.cdnurl}${articleInfo.headImg}`} alt="" title={articleInfo.headImgInfo} className="w100" /> : ''
                     }
                     {
-                        <div className={articleInfo.isMD? 'markdown haroopad ':''} dangerouslySetInnerHTML={{
+                        <div className={(!articleInfo.isMD||articleInfo.isMD==='false'||articleInfo.isMD=='undefined')? '':'markdown haroopad '} dangerouslySetInnerHTML={{
                             __html: contentHtml
                         }}></div>
                 }
