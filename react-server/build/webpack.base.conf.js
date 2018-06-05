@@ -36,7 +36,7 @@ module.exports = {
         let entry = resolve('src/entry');
         let nameArr = {};
         getAllFilesName(entry, nameArr);
-        // console.log(nameArr);
+        console.log(nameArr);
         return nameArr;
     })(),
     // entry:{

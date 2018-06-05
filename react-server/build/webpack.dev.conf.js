@@ -39,21 +39,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     },
     historyApiFallback: {
       rewrites: [
-        // shows views/landing.html as the landing page
-        // { from: /^\/interview\/login$/, to: '/interview/index.html' },
-        // { from: /^\/iv_examination_room$/, to: '/iv_index.html' },
-        // { from: /^\/iv_user_center$/, to: '/iv_index.html' },
-        // { from: /^\/iv_examination_room$/, to: '/iv_index.html' },
-        // { from: /^\/iv_examination_search$/, to: '/iv_index.html' },
-        // { from: /^\/iv_schedule$/, to: '/iv_index.html' },
-        // { from: /^\/iv_resumedetails$/, to: '/iv_index.html' },
-        // { from: /^\/iv_resumecomment$/, to: '/iv_index.html' },
-        // { from: /^\/iv_resumeList$/, to: '/iv_index.html' },
-        // { from: /^\/interview/, to: '/interview/index.html' },
-        // // shows views/subpage.html for all routes starting with /subpage
-        // { from: /^\/subpage/, to: '/views/subpage.html' },
-        // // shows views/404.html on all other pages
-        // { from: /./, to: '/views/404.html' },
         { from: /^\/manage$/, to: '/manage/manage.html' },
         { from: /^\/manage\/.*$/, to: '/manage/manage.html' },
       ],
@@ -88,7 +73,6 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
 (function (files) {
   for (let k = 0; k < files.length; k++) {
     let f = files[k];
-    // let chunks = f.replace(/[.]html/g, "").replace(/[.].htm/g, "");
     let chunks = f;
     if (chunks === "common") { continue; }
     let template = path.resolve(__dirname, "..", `src/ejs/${chunks}/template.js`);
@@ -102,12 +86,9 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
     }
     let htmlWebpackPluginConfig= {
       filename: f + ".html",
-      // template: `src/html/${f}`,
       template: template,
       inject: true,
       chunks: [`${chunks}/index`, 'vendor', 'manifest'],
-      // serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
-      //   './service-worker-dev.js'), 'utf-8')}</script>`
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -117,9 +98,9 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
       },
     };
     if(["manage","index"].indexOf(chunks)>-1){
-      // htmlWebpackPluginConfig.filename=f+"/"+"index.html";
       htmlWebpackPluginConfig.filename=f+"/"+f+".html";
     }
+    console.log(htmlWebpackPluginConfig.filename);
     let htmlWebpackPlugin = new HtmlWebpackPlugin(htmlWebpackPluginConfig);
     devWebpackConfig.plugins.push(htmlWebpackPlugin);
   }
