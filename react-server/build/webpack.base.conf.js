@@ -1,9 +1,11 @@
 'use strict'
 const path = require('path')
 const fs = require('fs');
+const os = require('os');
 const utils = require('./utils')
 const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const platform = os.platform();
 function resolve(dir) {
     return path.resolve(__dirname, '..', dir)
 }
@@ -21,11 +23,17 @@ function getAllFilesName(dir, nameArr) {
             getAllFilesName(rpath, nameArr);
         }
         else {
-            let n = rpath.slice(rpath.lastIndexOf('\\entry\\') + '\\entry\\'.length, rpath.length - 3);
-            n=n.replace(/\\/gi,'/');
+            let n ="";
+            if (platform === 'win32') {
+                n = rpath.slice(rpath.lastIndexOf('\\entry\\') + '\\entry\\'.length, rpath.length - 3);
+                n = n.replace(/\\/gi, '/');
+            } else {
+            // if(platform==='linux'){
+                n = rpath.slice(rpath.lastIndexOf('/entry/') + '/entry/'.length, rpath.length - 3);
+            }
             console.log(rpath);
             // nameArr[n] = ['webpack-dev-server/client?http://localhost:8080'].concat(rpath);
-            nameArr[n]=rpath;
+            nameArr[n] = rpath;
 
         }
         return item;
@@ -50,9 +58,9 @@ module.exports = {
             ? config.build.assetsPublicPath
             : config.dev.assetsPublicPath
     },
-   
+
     resolve: {
-        extensions: ['.js', '.json', '.jsx', '.css','.less'],
+        extensions: ['.js', '.json', '.jsx', '.css', '.less'],
         alias: {
             '@': resolve('src'),
         }
@@ -99,7 +107,7 @@ module.exports = {
             //         evaluate : '\\[\\[(.+?)\\]\\]' 
             //     }
             // },
-            {test: /\.ejs$/, loader: 'ejs-compiled-loader?htmlmin'} // enable here
+            { test: /\.ejs$/, loader: 'ejs-compiled-loader?htmlmin' } // enable here
             // {
             //     test: /\.ejs$/,
             //     loader: 'ejs-html-loader',
@@ -114,7 +122,7 @@ module.exports = {
         ]
     },
 
-    
+
 }
 
 

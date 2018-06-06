@@ -12,7 +12,7 @@ import SimpleMDE from 'simplemde'
 import marked from 'marked'
 // import highlight from 'highlight.js'
 import '@/css/add'
-// import '../../../../node_modules/simplemde/dist/simplemde.min.css';
+import '../../../node_modules/simplemde/dist/simplemde.min.css';
 // import '../../../../node_modules/highlight.js/styles/atelier-cave-dark.css';
 class Add extends Component {
     constructor(props) {
@@ -125,27 +125,27 @@ class Add extends Component {
         }
     }
     initSmde(){
-        // this.smde = new SimpleMDE({
-        //     element: document.getElementById('content').childElementCount,
-        //     autofocus: true,
-        //     autosave: true,
-        //     previewRender: function (plainText) {
-        //         return marked(plainText, {
-        //             renderer: new marked.Renderer(),
-        //             gfm: true,
-        //             pedantic: false,
-        //             sanitize: false,
-        //             tables: true,
-        //             breaks: true,
-        //             smartLists: true,
-        //             smartypants: true,
-        //             highlight: function (code) {
-        //                 return highlight.highlightAuto(code).value;
-        //             }
-        //         });
-        //         return plainText;
-        //     }
-        // })
+        this.smde = new SimpleMDE({
+            element: document.getElementById('content').childElementCount,
+            autofocus: true,
+            autosave: true,
+            previewRender: function (plainText) {
+                return marked(plainText, {
+                    renderer: new marked.Renderer(),
+                    gfm: true,
+                    pedantic: false,
+                    sanitize: false,
+                    tables: true,
+                    breaks: true,
+                    smartLists: true,
+                    smartypants: true,
+                    highlight: function (code) {
+                        return highlight.highlightAuto(code).value;
+                    }
+                });
+                return plainText;
+            }
+        })
     }
     /**
      * 保存文章
@@ -157,10 +157,11 @@ class Add extends Component {
             // let param = self.state;
             self.postData.append('content', self.state.content);
             self.postData.append('title', self.state.title);
+            if(self.state.headImg)
             if(this.isEdit&&!self.state.headImgFileName){
                 self.postData.append('headImg', self.state.headImg);
             }
-            else{
+            else {
                 self.postData.append('headImg', self.state.headImg,self.state.headImgFileName);
             }
             self.postData.append('author', self.state.author);
