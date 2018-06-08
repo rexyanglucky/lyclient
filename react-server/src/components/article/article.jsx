@@ -27,16 +27,16 @@ class Article extends Component {
         // });
     }
     getQueryParam(name) {
-        let search = window.location.search;
-        var pattern = /(\w+)=(\w+)/ig;
-        let param = {};
-        search.replace(pattern, function (rs, $1, $2, offset, source) {
-            param[$1] = $2;
-        })
-        if (param.hasOwnProperty(name)) {
-            return param[name];
-        }
-        return '';
+        // let search = window.location.search;
+        // var pattern = /(\w+)=(\w+)/ig;
+        // let param = {};
+        // search.replace(pattern, function (rs, $1, $2, offset, source) {
+        //     param[$1] = $2;
+        // })
+        // if (param.hasOwnProperty(name)) {
+        //     return param[name];
+        // }
+        // return '';
 
     }
 

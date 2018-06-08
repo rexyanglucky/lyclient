@@ -41,6 +41,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       rewrites: [
         { from: /^\/manage$/, to: '/manage/manage.html' },
         { from: /^\/manage\/.*$/, to: '/manage/manage.html' },
+        { from: /^\/article\/.*$/, to: '/index/index.html' },
       ],
     },
   },

@@ -25,7 +25,8 @@ const store = createStore(
 // store.dispatch(getArticleList(initialState.articleList));
 // const finalState = store.getState();
 // console.log(finalState);
-ReactDOM.hydrate(<Provider store={store}><App/></Provider>, document.getElementById('root'));
+let render=module.hot?ReactDOM.render:ReactDOM.hydrate;
+render(<Provider store={store}><App/></Provider>, document.getElementById('root'));
 // ReactDOM.render(<App />, document.getElementById('root'));
 // registerServiceWorker();
 

@@ -18,8 +18,9 @@ export function getArticleDetial(articleInfo) {
 
 export function getArticleListAsync(){
     return function(dispatch){
+        console.log('11111111111111111111111111111111111111111111111');
         dispatch(PreLoading());
-        return axios.get('https:'+config.url + "/article/list").then((response) => {
+        return axios.get(config.url + "/article/list").then((response) => {
                 let data = response.data.data;
                 dispatch(getArticleList(data));
         });
@@ -27,9 +28,10 @@ export function getArticleListAsync(){
 }
 
 export function getArticleDetialAsync({id='5a9623a0d9d5d150626ac566'}){
+
     return function(dispatch){
         dispatch(PreLoading());
-        return axios.get('https:'+config.url + "/article/detial", { params: { id: id } }).then((response) => {
+        return axios.get(config.url + "/article/detial", { params: { id: id } }).then((response) => {
                 let data = response.data.data;
                 data.length > 0? dispatch(getArticleDetial(data[0])):dispatch(getArticleDetial());
         });

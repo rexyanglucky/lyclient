@@ -1,7 +1,7 @@
 import fs from 'fs'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import { StaticRouter,matchPath } from 'react-router'
+import { StaticRouter, matchPath } from 'react-router'
 import thunkMiddleware from 'redux-thunk'
 import { createStore, applyMiddleware } from 'redux'
 // import { createStore } from 'redux'
@@ -25,64 +25,42 @@ app.use((req, res) => {
     })
     res.end()
   } else {
-    // if(req.url.indexOf("/article")>-1){
-    //   const match = matchPath(req.url, {
-    //     path: '/article/:id'
-    //   })
-    //   ArticleApi.getArticleDetial(match.params.id,data=>{
-    //     var initStore = { articleInfo: data };
-    //     var store = createStore(ArticleReducer, initStore);
-    //     store.dispatch(getArticleDetial(data));
-    //     renderHtml(store,context,req,res);
-    //   })
-    // }
-    // else if(req.url.indexOf("/favicon.ico")<0){
-    //   ArticleApi.getArticleList((data) => {
-    //     var initStore = { articleList: data };
-    //     var store = createStore(ArticleReducer, initStore);
-    //     store.dispatch(getArticleList(data));
-    //     renderHtml(store,context,req,res);
-    //   })
-
-
-      
-    // }
-    // else{
-    //   res.write('404 not found');
-    //   res.end();
-    // }
-
-  
-    let flag=false;
-    for(var k=0;k<routes.length;k++){
-      var item=routes[k];
+    let flag = false;
+    for (var k = 0; k < routes.length; k++) {
+      var item = routes[k];
       const match = matchPath(req.url, {
         // path: '/article/:id'
-        path:item.path
+        path: item.path
       })
       //noServerRender 设置路由，如果有 noServerRender 跳转到html指定的html页面，不做服务端渲染
-      if(match&&match.isExact&&item.noServerRender){
-        flag=true;
-        let  templateHtml = fs.readFileSync(item.index, 'utf-8');
+      if (match && match.isExact && item.noServerRender) {
+        flag = true;
+        let templateHtml = fs.readFileSync(item.index, 'utf-8');
         res.write(templateHtml);
         res.end()
         break;
       }
-      if(match&&match.isExact){       
-        flag=true;
+      if (match && match.isExact) {
+        if (item.redirect) {
+          res.writeHead(301, {
+            Location: item.redirect
+          })
+          res.end()
+        }
+        flag = true;
         const store = createStore(
           ArticleReducer,
           applyMiddleware(
             thunkMiddleware // 允许我们 dispatch() 函数
           )
         )
-        store.dispatch(item.initFunc(match.params)).then(()=>{
-          renderHtml(store,context,req,res,item);
+        store.dispatch(item.initFunc(match.params)).then(() => {
+          renderHtml(store, context, req, res, item);
         })
         break;
-      } 
+      }
     }
-    if(!flag){
+    if (!flag) {
       // res.write('404 not found');
       // res.end();
       res.write('404 not found');
@@ -94,7 +72,7 @@ app.use((req, res) => {
 app.listen(3000, function () {
   console.log("server start port 3000");
 });
-function renderHtml(store,context,req,res,item){
+function renderHtml(store, context, req, res, item) {
 
   const html = ReactDOMServer.renderToString(
     <Provider store={store}>
@@ -108,8 +86,8 @@ function renderHtml(store,context,req,res,item){
   );
   const finalState = store.getState();
 
- 
-  var templateHtml='';
+
+  var templateHtml = '';
   templateHtml = fs.readFileSync(item.index, 'utf-8');
   templateHtml = templateHtml.replace("<div id=root></div>", `<div id=root>${html}</div><script>window.__INITIAL_STATE__ = ${JSON.stringify(finalState)}</script>`);
   res.write(templateHtml);

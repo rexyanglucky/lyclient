@@ -10,18 +10,16 @@ class ArticleList extends Component {
         this.state = { articleList: articleList }
     }
     componentDidMount() {
-        // let self = this;
-        // axios.get(config.url + "/article/list").then((response) => {
-        //     if (response.data) {
-        //         let data = response.data.data;
-        //         self.setState({ articleList: data });
-        //     }
-        // });
-      
+      this.props.getArticleListAsync();
     }
-
+    componentWillReceiveProps(props){
+        const self=this;
+        const {articleList}=props;
+        self.setState({articleList: articleList });
+    }
+    
     render() {
-        if(!this.state.articleList){
+        if(!this.state.articleList||this.state.articleList.length===0){
             return <p>暂无文章呢，快去添加吧</p>
         }
         return (<ul className="article-list">
@@ -32,8 +30,6 @@ class ArticleList extends Component {
                     }
                 })
             }
-
-
         </ul>
         )
     }

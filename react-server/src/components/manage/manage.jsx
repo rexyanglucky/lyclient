@@ -28,7 +28,7 @@ class Manage extends Component {
     }
     delArticle(id) {
         let self = this;
-        axios.post("https:"+config.url + "/article/delete", { id: id }).then((response) => {
+        axios.post(config.url + "/article/delete", { id: id }).then((response) => {
             if (response.data) {
                 let list = self.state.articleList;
                 let r = list.filter((item, index, arr) => {

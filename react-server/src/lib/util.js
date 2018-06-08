@@ -60,4 +60,14 @@ if (isWeiXin()) {
     });
 }
 
-export default {isWeiXin};
+export default {
+    isWeiXin,
+    alert(msg) {
+
+    if (typeof window !== "undefined") {
+      alert(msg);
+    } else {
+      console.log(msg);
+    }
+
+  }};

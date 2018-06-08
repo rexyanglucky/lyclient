@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import ArticleList from '@/components/common/articleList';
 import  Actions from '@/actions';
 
-function mapStateToProps(state){
-    const {articleList}=state;
-    return {articleList};
-}
+// function mapStateToProps(state){
+//     const {articleList}=state;
+//     return {articleList};
+// }
+const mapStateToProps=(state)=>{return {articleList:state.articleList}};
 
 function mapDispatchToProps(dispatch){
     return bindActionCreators(Actions,dispatch);

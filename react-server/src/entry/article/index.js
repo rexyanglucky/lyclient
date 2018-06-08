@@ -4,7 +4,6 @@ import App from '@/components/article/App';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 import {Article as ArticleReducer} from '@/reducers';
-import {getArticleDetial} from '@/actions/article';
 import registerServiceWorker from '../../registerServiceWorker';
 import '@/lib/util.js';
 import '@/css/normalize.css';
