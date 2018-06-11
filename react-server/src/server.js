@@ -20,10 +20,7 @@ app.use(express.static('../'));
 app.use((req, res) => {
   const context = {}
   if (context.url) {
-    res.writeHead(301, {
-      Location: context.url
-    })
-    res.end()
+    res.redirect(301, context.url);
   } else {
     let flag = false;
     for (var k = 0; k < routes.length; k++) {
@@ -42,10 +39,7 @@ app.use((req, res) => {
       }
       if (match && match.isExact) {
         if (item.redirect) {
-          res.writeHead(301, {
-            Location: item.redirect
-          })
-          res.end()
+          writeHead
         }
         flag = true;
         const store = createStore(
@@ -56,15 +50,17 @@ app.use((req, res) => {
         )
         store.dispatch(item.initFunc(match.params)).then(() => {
           renderHtml(store, context, req, res, item);
+        }).catch(err => {
+          res.status(500).send(err);
+          // res.write(err);
+          // res.end()
+          // console.log(222);
         })
         break;
       }
     }
     if (!flag) {
-      // res.write('404 not found');
-      // res.end();
-      res.write('404 not found');
-      res.end();
+      res.status(404).end();
     }
   }
 })
@@ -85,8 +81,6 @@ function renderHtml(store, context, req, res, item) {
     </Provider>
   );
   const finalState = store.getState();
-
-
   var templateHtml = '';
   templateHtml = fs.readFileSync(item.index, 'utf-8');
   templateHtml = templateHtml.replace("<div id=root></div>", `<div id=root>${html}</div><script>window.__INITIAL_STATE__ = ${JSON.stringify(finalState)}</script>`);

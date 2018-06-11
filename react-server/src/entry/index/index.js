@@ -18,10 +18,13 @@ const initialState = window.__INITIAL_STATE__;
 // const finalState = store.getState();
 const store = createStore(
   ArticleReducer,
+  initialState,
   applyMiddleware(
     thunkMiddleware // 允许我们 dispatch() 函数
-  )
+  ),
 )
+store.getState();
+console.log(module.hot);
 let render=module.hot?ReactDOM.render:ReactDOM.hydrate;
 render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 // registerServiceWorker();

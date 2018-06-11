@@ -1,0 +1,13 @@
+db.category.insertMany([
+  {code:1,name:'前端',pcode:0},
+  {code:2,name:'后端',pcode:0},
+  {code:3,name:'运维',pcode:0},
+  {code:4,name:'数据库',pcode:0},
+  {code:5,name:'生活',pcode:0}
+]      
+);
+db.topics.insertMany([  
+{code:1,name:'react'},
+{code:2,name:'vue'},
+{code:3,name:'css'},
+{code:4,name:'redux'}])

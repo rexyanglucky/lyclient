@@ -22,14 +22,17 @@ class Add extends Component {
         console.log(props);
         const { match, getArticleDetialAsync } = props;
         this.state = {
-            title: '',
-            content: '',
-            author: 'rex',
-            headImg: '',
+            title: '',   //标题
+            content: '', //内容
+            author: 'rex', //作者
+            headImg: '',   //文章头部图片
             headImgBase64: '',
-            headImgBase64Small: '',
-            headImgFileName: '',
-            isMD: false
+            headImgBase64Small: '', //压缩图片
+            headImgFileName: '',//图片文件名
+            isMD: false,//是否是markdown
+            category:'',//分类 前端，后端，运维，数据库，生活,
+            categoryName:'',//分类 前端，后端，运维，数据库，生活
+            topics:''  //标签 react vue reactnative mysql
         };
         this.isEdit = false;
         if (match && match.params && match.params.id && getArticleDetialAsync) {

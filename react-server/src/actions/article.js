@@ -18,8 +18,8 @@ export function getArticleDetial(articleInfo) {
 
 export function getArticleListAsync(){
     return function(dispatch){
-        console.log('11111111111111111111111111111111111111111111111');
         dispatch(PreLoading());
+        console.log(config.url + "/article/list");
         return axios.get(config.url + "/article/list").then((response) => {
                 let data = response.data.data;
                 dispatch(getArticleList(data));
