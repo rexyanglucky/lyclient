@@ -28,8 +28,15 @@ export function getArticleDetial(id, callback) {
 }
 const fetch = (url, data, method) => {
     let obj = { url:config.url+url, method: method || 'post', data };
-    return axios.request(obj);
+    return axios.request(obj).then(result=>result.data);
 }
 // const getArticleList = (param) => fetch("/article/list",param,"get");
 // const getArticleDetial = (param) => fetch("/article/detial",param,"get");
+//发布文章
 export const publicArticle = (data) => fetch("/article/public",data,"");
+//获取分类列表
+export const getCategoryList = (data) => fetch("/dict/categorylist",data,"");
+//获取标签列表
+export const getTopicsList = (data) => fetch("/dict/topicslist",data,"");
+//保存草稿
+export const saveArticleDraft = (data) => fetch("/article/addDraft",data,"");

@@ -9,9 +9,10 @@ import axios from 'axios';
 import config from '@/config';
 import dataBlob from '@/lib/dataBlob';
 import util from '@/lib/util';
-import { publicArticle } from '@/api/article';
-import SimpleMDE from 'simplemde'
-import marked from 'marked'
+import { publicArticle, getCategoryList, getTopicsList,saveArticleDraft } from '@/api/article';
+import SimpleMDE from 'simplemde';
+import marked from 'marked';
+import Checkbox from "@/components/common/lui/checkbox.jsx";
 // import highlight from 'highlight.js'
 import '@/css/add'
 import '../../../node_modules/simplemde/dist/simplemde.min.css';
@@ -30,9 +31,11 @@ class Add extends Component {
             headImgBase64Small: '', //压缩图片
             headImgFileName: '',//图片文件名
             isMD: false,//是否是markdown
-            category:'',//分类 前端，后端，运维，数据库，生活,
-            categoryName:'',//分类 前端，后端，运维，数据库，生活
-            topics:''  //标签 react vue reactnative mysql
+            category: '',//分类 前端，后端，运维，数据库，生活,
+            categoryName: '',//分类 前端，后端，运维，数据库，生活
+            topics: [],  //标签 react vue reactnative mysql
+            categroyList: [],
+            topicsList: []
         };
         this.isEdit = false;
         if (match && match.params && match.params.id && getArticleDetialAsync) {
@@ -47,12 +50,13 @@ class Add extends Component {
         this.postData = new FormData();
         this.handleChange = this.handleChange.bind(this);
         this.saveArticleDraft = this.saveArticleDraft.bind(this);
-        this.publicArticle = this.publicArticle.bind(this);
+        this.public = this.public.bind(this);
     }
     componentDidMount() {
         if (!this.isEdit) {
             this.initSmde();
         }
+        this.initControl();
     }
     initSmde() {
         this.smde = new SimpleMDE({
@@ -77,6 +81,16 @@ class Add extends Component {
             }
         })
     }
+    initControl() {
+        const self = this;
+        getTopicsList().then((result) => {
+            self.setState({ topicsList: result.data });
+        });
+        getCategoryList().then((result) => {
+            self.setState({ categroyList: result.data });
+        })
+
+    }
     /**
      * 保存草稿箱
      */
@@ -96,8 +110,13 @@ class Add extends Component {
                     }
                 self.postData.append('author', self.state.author);
                 self.postData.append('isMD', self.state.isMD);
+                self.postData.append('category', self.state.category);
+                const categoryItem= self.state.categroyList.find(item => item.code == self.state.category);
+                self.postData.append('categoryName',categoryItem?categoryItem.name:"");
+                self.postData.append('topics', JSON.stringify(self.state.topics));
                 let param = self.postData;
-                let p = axios.post(config.url + "/article/addDraft", param);
+                let p = saveArticleDraft(param);
+                // let p = axios.post(config.url + "/article/addDraft", param);
                 resolve(p);
             }, 0);
         })
@@ -116,13 +135,13 @@ class Add extends Component {
     }
 
     //发布
-    publicArticle() {
+    public() {
         this.saveArticleDraftPromise().then((response) => {
             if (response.data && response.data.code === 1) {
                 const id = response.data.data[0];
-                const param ={id};
+                const param = { id };
                 publicArticle(param).then((r) => {
-                    if (r.data && r.data.code === 1) {
+                    if (r.code === 1) {
                         util.alert('发布成功');
                     } else {
                         util.alert('发布失败');
@@ -149,36 +168,33 @@ class Add extends Component {
             }
 
             if (file && supportedTypes.indexOf(file.type) >= 0) {
-                if (size >= 200) {//大于200K 进行压缩
-                    let oReader = new FileReader();
-                    oReader.onload = function (e) {
 
-                        let can = document.createElement("canvas");
-                        let cxt = can.getContext("2d");
-                        //加载图片获取图片真实宽度和高度  
-                        var image = new Image();
-                        image.onload = function () {
-                            let width = image.width;
-                            let height = image.height;
-                            can.width = width;
-                            can.height = height;
-                            cxt.drawImage(image, 0, 0);
-                            let dataUrl = can.toDataURL(file.type, 0.4);
-                            let realData = dataBlob.dataURLtoBlob(dataUrl, file.name);
-
-                            self.setState({ headImgBase64Small: dataUrl });
-                            self.setState({ [name]: realData });
-
-                        };
-                        image.src = e.target.result;
-
-                        self.setState({ headImgBase64: e.target.result });
-                    }
-                    oReader.readAsDataURL(file)
+                let oReader = new FileReader();
+                oReader.onload = function (e) {
+                    let can = document.createElement("canvas");
+                    let cxt = can.getContext("2d");
+                    //加载图片获取图片真实宽度和高度  
+                    var image = new Image();
+                    image.onload = function () {
+                        let width = image.width;
+                        let height = image.height;
+                        can.width = width;
+                        can.height = height;
+                        cxt.drawImage(image, 0, 0);
+                        let dataUrl = '';
+                        if (size >= 200) {//大于200K 进行压缩
+                            dataUrl = can.toDataURL(file.type, 0.4);
+                        } else {
+                            dataUrl = can.toDataURL(file.type);
+                        }
+                        let realData = dataBlob.dataURLtoBlob(dataUrl, file.name);
+                        self.setState({ headImgBase64Small: dataUrl });
+                        self.setState({ [name]: realData });
+                    };
+                    image.src = e.target.result;
+                    self.setState({ headImgBase64: e.target.result });
                 }
-                else {
-                    self.setState({ [name]: file });
-                }
+                oReader.readAsDataURL(file)
                 //设置文件名字
                 self.setState({ headImgFileName: file.name });
             }
@@ -187,22 +203,25 @@ class Add extends Component {
         else {
             let value = target.type === "checkbox" ? target.checked : target.value;
             self.setState({ [name]: value });
-            console.log(self.postData);
-            // self.postData.set(name,value);
-
-
         }
+    }
+    handleTopic({ check, value, label }) {
+        let t = this.state.topics;
+        if (check) { t.push(label); }
+        else { t.splice(t.indexOf(label), 1); }
+        this.setState({ topics: t })
     }
     render() {
 
         return (
             <div className='add_content'>
+                {this.state.topics.map(item => <p>{item}</p>)}
                 <link rel="stylesheet" href="/static/markdownstyle/markdown.css" />
                 <link rel="stylesheet" href="/static/markdownstyle/haroopad/haroopad.css" />
                 <label htmlFor="headImg"></label>
                 <input type="file" id="headImg" name="headImg" onChange={this.handleChange} />
 
-                <img src={this.state.headImgBase64} alt="" className='head_img_preview w100' />
+                {/* <img src={this.state.headImgBase64} alt="" className='head_img_preview w100' /> */}
                 <img src={this.state.headImgBase64Small} alt="" className='head_img_preview w100' />
                 <p>
                     <label htmlFor="title">标题</label>
@@ -214,9 +233,18 @@ class Add extends Component {
                 </p>
                 <label htmlFor="content">正文内容</label>
                 <textarea id='content' name='content' value={this.state.content} onChange={this.handleChange}></textarea>
+                <select name="category" id="category" onChange={this.handleChange}>
+                    {this.state.categroyList.map(item => (<option key={item.code} value={item.code}>{item.name}</option>))}
+                </select>
+                <div className="topic-warp">
+                    <div>
+                        {this.state.topicsList.map(item => (<span className="topic-item" key={item.code}><Checkbox clickCallback={this.handleTopic.bind(this)} label={item.name} value={item.code}>{item.name}</Checkbox></span>))}
+
+                    </div>
+                </div>
                 <p>
                     <input type="button" value="保存为草稿" onClick={this.saveArticleDraft} />
-                    <input type="button" value="保存并发布" onClick={this.publicArticle} />
+                    <input type="button" value="保存并发布" onClick={this.public} />
                 </p>
 
                 <Link to={{ pathname: '/manage' }} className="btn_add">返回列表</Link>

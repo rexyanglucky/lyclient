@@ -4,7 +4,7 @@ db.category.insertMany([
   {code:3,name:'运维',pcode:0},
   {code:4,name:'数据库',pcode:0},
   {code:5,name:'生活',pcode:0}
-]      
+]
 );
 db.topics.insertMany([  
 {code:1,name:'react'},

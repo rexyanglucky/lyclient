@@ -26,7 +26,8 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[name].[chunkhash].js')
+    chunkFilename: utils.assetsPath('js/[name].[chunkhash].js'),
+
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
@@ -71,6 +72,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       name: 'vendor',
       minChunks: function (module) {
         // any required modules inside node_modules are extracted to vendor
+        console.log(module.resource);
         return (
           module.resource &&
           /\.js$/.test(module.resource) &&
@@ -80,6 +82,10 @@ const webpackConfig = merge(baseWebpackConfig, {
         )
       }
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'simplemde'
+    }),
+
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({
@@ -174,4 +180,5 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
   }
 
 })(files);
+webpackConfig.entry['simplemde']='simplemde';
 module.exports = webpackConfig;
