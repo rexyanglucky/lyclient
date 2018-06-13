@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ArticleItem from './articleItem';
+import lazyLoad from './lui/lazyLoad';
 import config from '@/config';
 import axios from 'axios';
 
@@ -13,11 +14,12 @@ class ArticleList extends Component {
         if (!this.state.articleList || this.state.articleList.length === 0) {
             this.props.getArticleListAsync();
         }
+        
     }
     componentWillReceiveProps(props) {
         const self = this;
         const { articleList } = props;
-        self.setState({ articleList: articleList });
+        self.setState({ articleList: articleList },()=>{lazyLoad()});
     }
 
     render() {

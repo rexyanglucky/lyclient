@@ -4,7 +4,10 @@ const layout = require("./layout.ejs");
 
 const htmlChunck = {
     footer: footer(),
-    header: header()
+    header: header(),
+    css:'',
+    script:'',
+    self:''
 }
 
 module.exports = {
@@ -14,7 +17,7 @@ module.exports = {
     },
     //挂载
     mount(renderData) {
-        let realRenderData = Object.assign(renderData, htmlChunck);
+        let realRenderData = Object.assign(htmlChunck,renderData);
         return layout(realRenderData);
     }
 }

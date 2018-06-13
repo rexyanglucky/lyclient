@@ -9,7 +9,7 @@ rm(path.join(config.build.assetsRoot),err=>{
     if(err){throw err;}
     else{
         webpack(webpackConf,(err,stats)=>{
-            // console.log(stats)
+            console.log(stats)
         });
     }
 })

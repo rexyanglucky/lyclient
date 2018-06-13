@@ -31,8 +31,9 @@ function getAllFilesName(dir, nameArr) {
             // if(platform==='linux'){
                 n = rpath.slice(rpath.lastIndexOf('/entry/') + '/entry/'.length, rpath.length - 3);
             }
-            console.log(rpath);
-            // nameArr[n] = ['webpack-dev-server/client?http://localhost:8080'].concat(rpath);
+            // console.log(rpath);
+            // nameArr[n] = ['webpack-hot-middleware/client?noInfo=true&reload=true'].concat(rpath);
+            // 'webpack-hot-middleware/client?noInfo=true&reload=true'
             nameArr[n] = rpath;
 
         }
@@ -44,7 +45,7 @@ module.exports = {
         let entry = resolve('src/entry');
         let nameArr = {};
         getAllFilesName(entry, nameArr);
-        console.log(nameArr);
+        // console.log(nameArr);
         return nameArr;
     })(),
     // entry:{

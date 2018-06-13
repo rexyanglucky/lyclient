@@ -10,17 +10,15 @@ import config from '@/config';
 import dataBlob from '@/lib/dataBlob';
 import util from '@/lib/util';
 import { publicArticle, getCategoryList, getTopicsList,saveArticleDraft } from '@/api/article';
-import SimpleMDE from 'simplemde';
 import marked from 'marked';
 import Checkbox from "@/components/common/lui/checkbox.jsx";
 // import highlight from 'highlight.js'
 import '@/css/add'
-import '../../../node_modules/simplemde/dist/simplemde.min.css';
 // import '../../../../node_modules/highlight.js/styles/atelier-cave-dark.css';
 class Add extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
+        // console.log(props);
         const { match, getArticleDetialAsync } = props;
         this.state = {
             title: '',   //标题

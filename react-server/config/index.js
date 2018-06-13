@@ -35,10 +35,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/article': {
-        target: 'https://api.yangliangyu.com',
-        changeOrigin: true
-      }
+      // '/article': {
+      //   target: 'https://api.yangliangyu.com',
+      //   changeOrigin: true
+      // }
     },
     // devtool: 'eval-source-map',
     devtool: 'inline-source-map',

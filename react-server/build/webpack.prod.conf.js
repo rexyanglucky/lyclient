@@ -72,7 +72,6 @@ const webpackConfig = merge(baseWebpackConfig, {
       name: 'vendor',
       minChunks: function (module) {
         // any required modules inside node_modules are extracted to vendor
-        console.log(module.resource);
         return (
           module.resource &&
           /\.js$/.test(module.resource) &&
@@ -82,10 +81,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         )
       }
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'simplemde'
-    }),
-
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({
@@ -142,7 +137,7 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
     let f = files[k];
     // let chunks = f.replace(/[.]html/g, "").replace(/[.].htm/g, "");
     let chunks = f;
-    console.log(chunks);
+    // console.log(chunks);
     if(chunks==="common"){continue;}
     let template = path.resolve(__dirname, "..", `src/ejs/${chunks}/template.js`);
     //判断template 是否存在, 若不存在使用默认配置
@@ -180,5 +175,5 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
   }
 
 })(files);
-webpackConfig.entry['simplemde']='simplemde';
+// webpackConfig.entry['simplemde']='simplemde';
 module.exports = webpackConfig;

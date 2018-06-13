@@ -13,6 +13,10 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const portfinder = require('portfinder')
 
+Object.keys(baseWebpackConfig.entry).forEach(function (name) {
+  baseWebpackConfig.entry[name] = ['webpack-hot-middleware/client?noInfo=true&reload=true'].concat(baseWebpackConfig.entry[name])
+})
+
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true, extract: true })
@@ -23,7 +27,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   // these devServer options should be customized in /config/index.js
   devServer: {
     historyApiFallback: true,
-    hot: false,
+    hot: true,
     host: process.env.HOST || config.dev.host,
     port: process.env.PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
@@ -101,34 +105,34 @@ let files = fs.readdirSync(path.resolve(__dirname, "..", "src/ejs"));
     if(["manage","index"].indexOf(chunks)>-1){
       htmlWebpackPluginConfig.filename=f+"/"+f+".html";
     }
-    console.log(htmlWebpackPluginConfig.filename);
+    // console.log(htmlWebpackPluginConfig.filename);
     let htmlWebpackPlugin = new HtmlWebpackPlugin(htmlWebpackPluginConfig);
     devWebpackConfig.plugins.push(htmlWebpackPlugin);
   }
 })(files)
 
+module.exports =devWebpackConfig;
+// module.exports = new Promise((resolve, reject) => {
+//   portfinder.basePort = process.env.PORT || config.dev.port
+//   portfinder.getPort((err, port) => {
+//     if (err) {
+//       reject(err)
+//     } else {
+//       // publish the new Port, necessary for e2e tests
+//       process.env.PORT = port
+//       // add port to devServer config
+//       devWebpackConfig.devServer.port = port
+//       // Add FriendlyErrorsPlugin
+//       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
+//         compilationSuccessInfo: {
+//           messages: [`Your application is running here: http://${config.dev.host}:${port}`],
+//         },
+//         onErrors: config.dev.notifyOnErrors
+//           ? utils.createNotifierCallback()
+//           : undefined
+//       }))
 
-module.exports = new Promise((resolve, reject) => {
-  portfinder.basePort = process.env.PORT || config.dev.port
-  portfinder.getPort((err, port) => {
-    if (err) {
-      reject(err)
-    } else {
-      // publish the new Port, necessary for e2e tests
-      process.env.PORT = port
-      // add port to devServer config
-      devWebpackConfig.devServer.port = port
-      // Add FriendlyErrorsPlugin
-      devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
-        compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${config.dev.host}:${port}`],
-        },
-        onErrors: config.dev.notifyOnErrors
-          ? utils.createNotifierCallback()
-          : undefined
-      }))
-
-      resolve(devWebpackConfig)
-    }
-  })
-})
+//       resolve(devWebpackConfig)
+//     }
+//   })
+// })
