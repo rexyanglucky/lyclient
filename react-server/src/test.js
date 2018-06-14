@@ -78,3 +78,11 @@ promise
   .then(taskB)
   .catch(onRejected)
   .then(finalTask);
+
+
+
+  const axios = require('axios')
+
+axios.get('http://api.yangliangyu.com/article/list').then(response => {
+  console.log(response.data)
+}).catch(err => { console.log(err.stack) })

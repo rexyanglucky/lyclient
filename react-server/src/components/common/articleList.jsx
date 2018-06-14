@@ -13,6 +13,8 @@ class ArticleList extends Component {
     componentDidMount() {
         if (!this.state.articleList || this.state.articleList.length === 0) {
             this.props.getArticleListAsync();
+        } else{
+            lazyLoad();
         }
         
     }

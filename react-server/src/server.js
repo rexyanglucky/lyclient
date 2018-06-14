@@ -38,10 +38,12 @@ app.use((req, res) => {
         break;
       }
       if (match && match.isExact) {
-        if (item.redirect) {
-          writeHead
-        }
         flag = true;
+        if (item.redirect) {
+          // writeHead
+          res.redirect(301, item.redirect);
+          break;
+        }
         const store = createStore(
           ArticleReducer,
           applyMiddleware(
@@ -49,12 +51,10 @@ app.use((req, res) => {
           )
         )
         store.dispatch(item.initFunc(match.params)).then(() => {
-          renderHtml(store, context, req, res, item);
-        }).catch(err => {
+          renderHtml(store, context, req, res, item)
+        }
+        ).catch(err => {
           res.status(500).send(err);
-          // res.write(err);
-          // res.end()
-          // console.log(222);
         })
         break;
       }

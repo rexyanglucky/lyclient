@@ -42,6 +42,11 @@ const router=[
         component:Manage,
         redirect:'/'
     },
+    {
+        path:'/index/',
+        component:Manage,
+        redirect:'/'
+    },
 
 
 ]

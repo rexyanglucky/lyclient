@@ -19,10 +19,11 @@ export function getArticleDetial(articleInfo) {
 export function getArticleListAsync(){
     return function(dispatch){
         dispatch(PreLoading());
-        return axios.get(config.url + "/article/list").then((response) => {
+        let p= axios.get(config.url + "/article/list").then((response) => {
                 let data = response.data.data;
                 dispatch(getArticleList(data));
-        });
+        }).catch(err=>{console.log(err.stack)});
+        return p;
     }
 }
 
