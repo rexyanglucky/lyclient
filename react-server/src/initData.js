@@ -3,7 +3,11 @@ db.category.insertMany([
   {code:2,name:'后端',pcode:0},
   {code:3,name:'运维',pcode:0},
   {code:4,name:'数据库',pcode:0},
-  {code:5,name:'生活',pcode:0}
+  {code:5,name:'生活',pcode:0},
+  {code:6,name:'本站搭建',pcode:0},
+  {code:7,name:'读书观影',pcode:0},
+  {code:8,name:'随笔',pcode:0},
+  {code:9,name:'问题记录',pcode:0},
 ]
 );
 db.topics.insertMany([  

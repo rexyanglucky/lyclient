@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AboutContent  from '../common/aboutContent';
 class SlideRight extends Component {
     // constructor(){
     //     super();
@@ -6,7 +7,9 @@ class SlideRight extends Component {
     render() {
         return (
             <div className="slide_right">
-                <div className="info">
+                <AboutContent/>
+                {/* <div className="info">
+
                     <div className="warp">
                         <div className="logo"></div>
                         <div className="text">
@@ -16,7 +19,7 @@ class SlideRight extends Component {
                             <p>仅此而已，若您不经意浏览到此小站，请善意对待。</p>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         )
     }

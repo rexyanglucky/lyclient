@@ -21,7 +21,7 @@ class ArticleItem extends Component {
                         <p className="author">{article.author} <span className="item-time">{new Date(article.updateTime).toCustomRegString("yyyy-MM-dd HH:mm")}</span></p>
                         <a className="title" href={`/article/${article._id}`}>{article.title}</a>
                         <p>{content}</p>
-                        <ArticleItemMsg />
+                        <ArticleItemMsg article={article} />
                     </div>
                     {article.headImg && (<div className="right">
                         <img src= {`${config.cdnurl}/uploadFile/teacher1.jpg`} alt={article.title}  data-realsrc={`${config.cdnurl}/${article.headImg}`} />

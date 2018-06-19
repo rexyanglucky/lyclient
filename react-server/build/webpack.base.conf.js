@@ -45,6 +45,11 @@ module.exports = {
         let entry = resolve('src/entry');
         let nameArr = {};
         getAllFilesName(entry, nameArr);
+        // "babel-polyfill"
+        // nameArr["babel-polyfill"]="babel-polyfill";
+        Object.keys(nameArr).forEach((key)=>{
+            nameArr[key]=["babel-polyfill"].concat(nameArr[key]);
+        })
         // console.log(nameArr);
         return nameArr;
     })(),

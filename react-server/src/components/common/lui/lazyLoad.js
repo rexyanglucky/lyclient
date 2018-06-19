@@ -69,7 +69,9 @@ export default function (imgTag) {
     const nodeList = document.querySelectorAll(`img[${imgTag}]`);
     let start = scrollTop;
     let end = scrollTop + clientHeight;
-    nodeList.forEach(item => {
+
+    let nodeArray=[].slice.call(nodeList);
+    nodeArray.forEach(item => {
       let itemTop = item.offsetTop;
       let itemBottom = item.offsetHeight + itemTop;
       if ((itemTop >= start && itemTop <= end)||(itemBottom>=start&&itemBottom<=end)) {

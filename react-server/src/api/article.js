@@ -40,3 +40,4 @@ export const getCategoryList = (data) => fetch("/dict/categorylist",data,"");
 export const getTopicsList = (data) => fetch("/dict/topicslist",data,"");
 //保存草稿
 export const saveArticleDraft = (data) => fetch("/article/addDraft",data,"");
+

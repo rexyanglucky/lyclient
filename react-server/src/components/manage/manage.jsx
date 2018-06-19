@@ -10,7 +10,7 @@ import ArticleItem from '@/components/common/articleItem';
 import config from '@/config';
 import axios from 'axios';
 import { connect } from 'react-redux'
-import { getArticleList } from '@/actions/article';
+import lazyLoad from '../common/lui/lazyLoad';
 import '@/css/index';
 import '@/css/manage';
 class Manage extends Component {
@@ -25,6 +25,16 @@ class Manage extends Component {
     }
     componentDidMount() {
         let self = this;
+        if (!self.state.articleList || self.state.articleList.length === 0) {
+            self.props.getArticleListAsync();
+        } else{
+            lazyLoad();
+        }
+    }
+    componentWillReceiveProps(props){
+        const self = this;
+        const { articleList } = props;
+        self.setState({ articleList: articleList },()=>{lazyLoad()});
     }
     delArticle(id) {
         let self = this;

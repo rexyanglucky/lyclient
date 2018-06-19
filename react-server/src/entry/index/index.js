@@ -1,3 +1,4 @@
+import "babel-polyfill";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '@/components/index/App';
@@ -24,7 +25,7 @@ const store = createStore(
   ),
 )
 store.getState();
-console.log(module.hot);
+// console.log(module.hot);
 let render=module.hot?ReactDOM.render:ReactDOM.hydrate;
 render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 // registerServiceWorker();

@@ -123,8 +123,8 @@ class Add extends Component {
     saveArticleDraft() {
         let f = this.saveArticleDraftPromise()
             .then(response => {
-                if (response.data && response.data.code === 1) {
-                    let data = response.data.data;
+                if (response.code === 1) {
+                    let data = response.data;
                     util.alert('保存草稿成功');
                 } else {
                     util.alert('保存失败');
@@ -135,8 +135,8 @@ class Add extends Component {
     //发布
     public() {
         this.saveArticleDraftPromise().then((response) => {
-            if (response.data && response.data.code === 1) {
-                const id = response.data.data[0];
+            if (response.code === 1) {
+                const id = response.data[0];
                 const param = { id };
                 publicArticle(param).then((r) => {
                     if (r.code === 1) {
