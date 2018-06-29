@@ -8,22 +8,21 @@ import marked from 'marked'
 class Article extends Component {
     constructor(props) {
         super(props);
-        const {articleInfo}=props;
+        const {articleInfo,match}=props;
+        this.aritcleId=(match && match.params && match.params.id) ? match.params.id : '';
         this.state = {
             articleInfo: articleInfo
         }
     }
     componentDidMount() {
-        // let self = this;
-        // let id = self.getQueryParam("id");
-        // axios.get(config.url + "/article/detial", { params: { id: id } }).then((response) => {
-        //     if (response.data) {
-        //         let data = response.data.data;
-        //         if (data.length > 0) {
-        //             self.setState({ articleInfo: data[0] });
-        //         }
-        //     }
-        // });
+        if (!this.state.articleInfo&&this.aritcleId) {
+            this.props.getArticleDetialAsync({id : this.aritcleId});
+        }
+    }
+    componentWillReceiveProps(props) {
+        const self = this;
+        const { articleInfo } = props;
+        self.setState({ articleInfo: articleInfo });
     }
     getQueryParam(name) {
         // let search = window.location.search;
@@ -46,7 +45,7 @@ class Article extends Component {
             return <p>文章找不到了。。。</p>
         }
         let contentHtml = '';
-        if (articleInfo.content) {
+        if (articleInfo.content && articleInfo.isMD && articleInfo.isMD!="false") {
             contentHtml = marked(articleInfo.content,
                 {
                     renderer: new marked.Renderer(),
@@ -62,6 +61,8 @@ class Article extends Component {
                         return code;
                     }
                 });
+        } else {
+            contentHtml = articleInfo.content;
         }
         return (
             <div className="article_content">

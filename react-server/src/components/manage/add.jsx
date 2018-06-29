@@ -4,7 +4,7 @@ import {
     Route,
     Link
     // Switch
-} from 'react-router-dom'
+} from 'react-router-dom';
 import axios from 'axios';
 import config from '@/config';
 import dataBlob from '@/lib/dataBlob';
@@ -33,11 +33,13 @@ class Add extends Component {
             categoryName: '',//分类 前端，后端，运维，数据库，生活
             topics: [],  //标签 react vue reactnative mysql
             categroyList: [],
-            topicsList: []
+            topicsList: [],
+            _id:''
         };
         this.isEdit = false;
         if (match && match.params && match.params.id && getArticleDetialAsync) {
             getArticleDetialAsync(match.params).then(() => {
+                typeof this.props.articleInfo.topics === 'string' ? JSON.parse(this.props.articleInfo.topics) : this.props.articleInfo.topics;
                 this.setState({ ...this.props.articleInfo })
                 this.initSmde();
 
@@ -112,6 +114,10 @@ class Add extends Component {
                 const categoryItem= self.state.categroyList.find(item => item.code == self.state.category);
                 self.postData.append('categoryName',categoryItem?categoryItem.name:"");
                 self.postData.append('topics', JSON.stringify(self.state.topics));
+                // self.postData.append('topics', self.state.topics);
+                if(self.state._id){
+                   self.postData.append('_id',self.state._id)
+                }
                 let param = self.postData;
                 let p = saveArticleDraft(param);
                 // let p = axios.post(config.url + "/article/addDraft", param);
@@ -121,6 +127,7 @@ class Add extends Component {
 
     }
     saveArticleDraft() {
+        const self = this;
         let f = this.saveArticleDraftPromise()
             .then(response => {
                 if (response.code === 1) {
@@ -210,16 +217,13 @@ class Add extends Component {
         this.setState({ topics: t })
     }
     render() {
-
         return (
             <div className='add_content'>
-                {this.state.topics.map(item => <p>{item}</p>)}
+                {this.state.topics.map(item => <p key={item}>{item}</p>)}
                 <link rel="stylesheet" href="/static/markdownstyle/markdown.css" />
                 <link rel="stylesheet" href="/static/markdownstyle/haroopad/haroopad.css" />
                 <label htmlFor="headImg"></label>
                 <input type="file" id="headImg" name="headImg" onChange={this.handleChange} />
-
-                {/* <img src={this.state.headImgBase64} alt="" className='head_img_preview w100' /> */}
                 <img src={this.state.headImgBase64Small} alt="" className='head_img_preview w100' />
                 <p>
                     <label htmlFor="title">标题</label>
@@ -236,7 +240,12 @@ class Add extends Component {
                 </select>
                 <div className="topic-warp">
                     <div>
-                        {this.state.topicsList.map(item => (<span className="topic-item" key={item.code}><Checkbox clickCallback={this.handleTopic.bind(this)} label={item.name} value={item.code}>{item.name}</Checkbox></span>))}
+                        {
+                            this.state.topicsList.map(item =>
+                            {
+                                return (<span className="topic-item" key={item.code}><Checkbox check= {(this.state.topics.indexOf(item.name)>-1)} clickCallback={this.handleTopic.bind(this)} label={item.name} value={item.code}>{item.name}</Checkbox></span>);
+                            })
+                        }
 
                     </div>
                 </div>

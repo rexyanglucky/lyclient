@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom'
 import Index from './index';
+import Article from '@/containers/article';
 import '@/css/normalize.css';
 
 class App extends Component {
@@ -12,6 +18,19 @@ class App extends Component {
         <Index/>
       </div>
 
+    );
+  }
+
+  render() {
+    return (
+      <div>
+      <Router>
+        <Switch>
+        <Route exact path="/index" component={Index} />
+        <Route path="/article/:id" component={Article} />
+        </Switch>
+      </Router>
+      </div>
     );
   }
 }
