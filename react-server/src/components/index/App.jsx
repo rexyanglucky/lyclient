@@ -21,18 +21,21 @@ class App extends Component {
     );
   }
 
-  render() {
-    return (
-      <div>
-      <Router>
-        <Switch>
-        <Route exact path="/index" component={Index} />
-        <Route path="/article/:id" component={Article} />
-        </Switch>
-      </Router>
-      </div>
-    );
-  }
+  // render() {
+  //   return (
+  //     <div>
+  //     <Router>
+  //       <Switch>
+  //       {/* <Route exact path="" component={Index} /> */}
+  //       <Route exact path="/" component={Index} />
+  //       <Route path="/index" component={Index} />
+  //       <Route path="/index/" component={Index} />
+  //       <Route path="/article/:id" component={Article} />
+  //       </Switch>
+  //     </Router>
+  //     </div>
+  //   );
+  // }
 }
 
 export default App;
